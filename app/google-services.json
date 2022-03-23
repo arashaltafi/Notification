@@ -1,0 +1,172 @@
+{
+  "project_info": {
+    "project_number": "89066848606",
+    "firebase_url": "https://arash-c960a.firebaseio.com",
+    "project_id": "arash-c960a",
+    "storage_bucket": "arash-c960a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89066848606:android:09ee9e9e5b17076a1a8fcf",
+        "android_client_info": {
+          "package_name": "com.arash.altafi.bevaghtfilm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89066848606-6v9kpkfli6m6jmd6t5emvk26g37rjjsf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arash.altafi.bevaghtfilm",
+            "certificate_hash": "5fbb25e37ef842c088ad56a436deaf341a5d6bad"
+          }
+        },
+        {
+          "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ulR5jx52YS9XEhoCPKaLXhCuGX9vca4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89066848606:android:f2eeadf75d35f78f1a8fcf",
+        "android_client_info": {
+          "package_name": "com.arash.altafi.pushnotification1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ulR5jx52YS9XEhoCPKaLXhCuGX9vca4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89066848606:android:e7664523e71ed5df1a8fcf",
+        "android_client_info": {
+          "package_name": "com.arash.altafi.pushnotification2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ulR5jx52YS9XEhoCPKaLXhCuGX9vca4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89066848606:android:844f9ad9c6930a7f1a8fcf",
+        "android_client_info": {
+          "package_name": "com.arash.altafi.whatsappdownloader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89066848606-it5hupaqehnvgikvvhkuo6th6136lp8n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arash.altafi.whatsappdownloader",
+            "certificate_hash": "5fbb25e37ef842c088ad56a436deaf341a5d6bad"
+          }
+        },
+        {
+          "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ulR5jx52YS9XEhoCPKaLXhCuGX9vca4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89066848606:android:f885960559721c3d1a8fcf",
+        "android_client_info": {
+          "package_name": "org.telegram.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ulR5jx52YS9XEhoCPKaLXhCuGX9vca4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
