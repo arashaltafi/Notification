@@ -4,8 +4,7 @@ class Constants {
 
     companion object {
         const val BASE_URL = "https://fcm.googleapis.com"
-//        const val SERVER_KEY = "AAAAFLzMQV4:APA91bHTAksrWWvZ-TDOgBE1602i_rIQJmqHC-2vcJ3AkM1hChHsvbtrIFGxqzZG5qzVmha6LH5TBWNHzhob4fGZ3n_rBw7QBTizc66rQz9VerbpOnsFGjeZSQjvXfxH6RRIdsy-k2O-"
-        const val SERVER_KEY = "BJ8WjuVAtR-HQyAXvIIdPww50MEAe1IC_Eftt3NeUyAfuCbxdGAR6kkmothhb6XB204zm-N5GAA2NCWv4h3dbVE"
+        const val SERVER_KEY = "AAAAYUUCqJI:APA91bFgqidAAGsT7hhptyJLNr04k9ycJwGglsNxxN_3KHqdv32Qyptm_hzIlVeGRMWxXmewqmK8UeoAYxIc8j5stU0UMkSA2TE-UvuzuDW2XZ-Jxji9VCjfkxI0eC4_XGQoR6RjE6-i"
         const val CONTENT_TYPE = "application/json"
     }
 }
