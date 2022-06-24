@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "89066848606",
-    "firebase_url": "https://arash-c960a.firebaseio.com",
-    "project_id": "arash-c960a",
-    "storage_bucket": "arash-c960a.appspot.com"
+    "project_number": "417769629842",
+    "firebase_url": "https://my-project-1573765492336-default-rtdb.firebaseio.com",
+    "project_id": "my-project-1573765492336",
+    "storage_bucket": "my-project-1573765492336.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:89066848606:android:09ee9e9e5b17076a1a8fcf",
+        "mobilesdk_app_id": "1:417769629842:android:159f2f18e1765bdd5a5e4b",
         "android_client_info": {
-          "package_name": "com.arash.altafi.bevaghtfilm"
+          "package_name": "com.arash.altafi.chattest"
         }
       },
       "oauth_client": [
         {
-          "client_id": "89066848606-6v9kpkfli6m6jmd6t5emvk26g37rjjsf.apps.googleusercontent.com",
+          "client_id": "417769629842-j7m4g0ib3df3ld8tq2o09lfj3g0hid0e.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.arash.altafi.bevaghtfilm",
+            "package_name": "com.arash.altafi.chattest",
             "certificate_hash": "5fbb25e37ef842c088ad56a436deaf341a5d6bad"
           }
         },
         {
-          "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+          "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB_ulR5jx52YS9XEhoCPKaLXhCuGX9vca4"
+          "current_key": "AIzaSyAbSz3dlUQHd0CJSD4WvCm7ZUbgFIMeSgE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+              "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -45,93 +45,35 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:89066848606:android:f2eeadf75d35f78f1a8fcf",
+        "mobilesdk_app_id": "1:417769629842:android:690d78922e5b32065a5e4b",
         "android_client_info": {
-          "package_name": "com.arash.altafi.pushnotification1"
+          "package_name": "com.arash.altafi.notification1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB_ulR5jx52YS9XEhoCPKaLXhCuGX9vca4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:89066848606:android:e7664523e71ed5df1a8fcf",
-        "android_client_info": {
-          "package_name": "com.arash.altafi.pushnotification2"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB_ulR5jx52YS9XEhoCPKaLXhCuGX9vca4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:89066848606:android:844f9ad9c6930a7f1a8fcf",
-        "android_client_info": {
-          "package_name": "com.arash.altafi.whatsappdownloader"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "89066848606-it5hupaqehnvgikvvhkuo6th6136lp8n.apps.googleusercontent.com",
+          "client_id": "417769629842-rvgn6852o9iqcssh1nd1ckm0aoce0nvu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.arash.altafi.whatsappdownloader",
+            "package_name": "com.arash.altafi.notification1",
             "certificate_hash": "5fbb25e37ef842c088ad56a436deaf341a5d6bad"
           }
         },
         {
-          "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+          "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB_ulR5jx52YS9XEhoCPKaLXhCuGX9vca4"
+          "current_key": "AIzaSyAbSz3dlUQHd0CJSD4WvCm7ZUbgFIMeSgE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+              "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -140,27 +82,72 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:89066848606:android:f885960559721c3d1a8fcf",
+        "mobilesdk_app_id": "1:417769629842:android:7ca321b25eaafe7b5a5e4b",
         "android_client_info": {
-          "package_name": "org.telegram.messenger"
+          "package_name": "com.arash.altafi.notification2"
         }
       },
       "oauth_client": [
         {
-          "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+          "client_id": "417769629842-gontgvjihs7d3mvp2ik5hhlhci3vavo8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arash.altafi.notification2",
+            "certificate_hash": "5fbb25e37ef842c088ad56a436deaf341a5d6bad"
+          }
+        },
+        {
+          "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB_ulR5jx52YS9XEhoCPKaLXhCuGX9vca4"
+          "current_key": "AIzaSyAbSz3dlUQHd0CJSD4WvCm7ZUbgFIMeSgE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "89066848606-ael6h63fuu7llrt3jl2ns1m2uur2p87m.apps.googleusercontent.com",
+              "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417769629842:android:8ca126386be829e65a5e4b",
+        "android_client_info": {
+          "package_name": "com.arashaltafi.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417769629842-e5dgc8lh8e88tjh0ci3rujlruljlv1ll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arashaltafi.chat",
+            "certificate_hash": "5fbb25e37ef842c088ad56a436deaf341a5d6bad"
+          }
+        },
+        {
+          "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbSz3dlUQHd0CJSD4WvCm7ZUbgFIMeSgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

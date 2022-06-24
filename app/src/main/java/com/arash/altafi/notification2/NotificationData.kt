@@ -1,4 +1,4 @@
-package com.arash.altafi.pushnotification2
+package com.arash.altafi.notification2
 
 data class NotificationData(
     val title: String,

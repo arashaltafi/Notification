@@ -1,4 +1,4 @@
-package com.arash.altafi.pushnotification2
+package com.arash.altafi.notification2
 
 import android.content.Context
 import android.content.Intent
