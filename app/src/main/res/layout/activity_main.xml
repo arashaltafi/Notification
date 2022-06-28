@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     tools:context=".MainActivity">
 
     <TextView
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:text="Sample Push Notification 2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Sample Push Notification 2"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -54,19 +54,53 @@
             android:inputType="text" />
 
         <EditText
+            android:visibility="invisible"
             android:id="@+id/etToken"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Enter Token"
-            android:inputType="textPersonName"
-            android:visibility="invisible" />
+            android:inputType="textPersonName" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSendEmulator29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send To Emulator"
+                android:textSize="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:text="Send All"
+                android:textSize="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSendS21FE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send To S21"
+                android:textSize="10dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSend"
+            android:id="@+id/btnSendCurrentDevice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send" />
+            android:layout_marginTop="10dp"
+            android:text="Send To Current Device"
+            android:textSize="10dp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

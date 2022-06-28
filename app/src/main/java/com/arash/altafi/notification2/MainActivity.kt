@@ -33,10 +33,56 @@ class MainActivity : AppCompatActivity() {
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
             FirebaseService.token = it.token
             etToken.setText(it.token)
+            Log.i("test123321", "onNewToken: ${it.token}")
         }
         FirebaseMessaging.getInstance().subscribeToTopic(topic)
 
         btnSend.setOnClickListener {
+            val title = etTitle.text.toString()
+            val message = etMessage.text.toString()
+            val image = etImage.text.toString()
+            val recipientToken = etToken.text.toString()
+            if(title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
+                PushNotification(
+                    NotificationData(title, message, image),
+                    topic
+                ).also {
+                    sendNotification(it)
+                }
+            }
+        }
+
+        btnSendS21FE.setOnClickListener {
+            val title = etTitle.text.toString()
+            val message = etMessage.text.toString()
+            val image = etImage.text.toString()
+            val recipientToken = etToken.text.toString()
+            if(title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
+                PushNotification(
+                    NotificationData(title, message, image),
+                    Constants.PHONE_S21_FE_TOKEN
+                ).also {
+                    sendNotification(it)
+                }
+            }
+        }
+
+        btnSendEmulator29.setOnClickListener {
+            val title = etTitle.text.toString()
+            val message = etMessage.text.toString()
+            val image = etImage.text.toString()
+            val recipientToken = etToken.text.toString()
+            if(title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
+                PushNotification(
+                    NotificationData(title, message, image),
+                    Constants.EMULATOR_API_29_TOKEN
+                ).also {
+                    sendNotification(it)
+                }
+            }
+        }
+
+        btnSendCurrentDevice.setOnClickListener {
             val title = etTitle.text.toString()
             val message = etMessage.text.toString()
             val image = etImage.text.toString()
@@ -50,6 +96,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
     }
 
     private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {

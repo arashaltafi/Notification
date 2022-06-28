@@ -23,7 +23,7 @@
           }
         },
         {
-          "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
+          "client_id": "417769629842-ltqe0of37ik4h38sb8bch0cg36kb27u8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -60,7 +60,7 @@
           }
         },
         {
-          "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
+          "client_id": "417769629842-ltqe0of37ik4h38sb8bch0cg36kb27u8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -97,7 +97,7 @@
           }
         },
         {
-          "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
+          "client_id": "417769629842-ltqe0of37ik4h38sb8bch0cg36kb27u8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -134,7 +134,36 @@
           }
         },
         {
-          "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
+          "client_id": "417769629842-ltqe0of37ik4h38sb8bch0cg36kb27u8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbSz3dlUQHd0CJSD4WvCm7ZUbgFIMeSgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417769629842:android:0d2eed4b5abc6bfd5a5e4b",
+        "android_client_info": {
+          "package_name": "com.arashaltafi.firebasechat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417769629842-ltqe0of37ik4h38sb8bch0cg36kb27u8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
