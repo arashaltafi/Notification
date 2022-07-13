@@ -13,6 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:backgroundTint="#FFFFFF"
         android:text="Sample Push Notification 2"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -54,13 +55,13 @@
             android:inputType="text" />
 
         <EditText
-            android:visibility="invisible"
             android:id="@+id/etToken"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Enter Token"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:visibility="invisible" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -105,12 +106,14 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSample1"
+        android:id="@+id/btnTestCrashlytics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="Sample Push Notification 1" />
+        android:text="Test Crashlytics"
+        android:textColor="@color/white"
+        app:backgroundTint="#EF5555" />
 
 </RelativeLayout>

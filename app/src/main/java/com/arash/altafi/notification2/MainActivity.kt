@@ -1,14 +1,11 @@
 package com.arash.altafi.notification2
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,16 +13,13 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private val url = "https://github.com/arashaltafi/Push_Notification_1"
     private val topic = "/topics/myTopic2"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnSample1.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-//            startActivity(intent)
+        btnTestCrashlytics.setOnClickListener {
             throw RuntimeException("Test Crash")
         }
 
