@@ -6,7 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.google.firebase.iid.FirebaseInstanceId
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,25 +16,31 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var url: String
+    private val url = "https://github.com/arashaltafi/Push_Notification_1"
     private val topic = "/topics/myTopic2"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        url = "https://github.com/arashaltafi/Push_Notification_1"
         btnSample1.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+//            startActivity(intent)
+            throw RuntimeException("Test Crash")
         }
 
         FirebaseService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
-            FirebaseService.token = it.token
-            etToken.setText(it.token)
-            Log.i("test123321", "onNewToken: ${it.token}")
-        }
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("test123321", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            val token = task.result
+            FirebaseService.token = token
+            etToken.setText(token)
+            Log.i("test123321", "onNewToken: $token")
+        })
+
         FirebaseMessaging.getInstance().subscribeToTopic(topic)
 
         btnSend.setOnClickListener {
@@ -103,9 +109,9 @@ class MainActivity : AppCompatActivity() {
         try {
             val response = RetrofitInstance.api.postNotification(notification)
             if(response.isSuccessful) {
-                Log.d("test123321", "Response: ${Gson().toJson(response)}")
+//                Log.d("test123321", "Response: ${Gson().toJson(response)}")
             } else {
-                Log.e("test123321", response.errorBody().toString())
+//                Log.e("test123321", response.errorBody().toString())
             }
         } catch(e: Exception) {
             Log.e("test123321", e.toString())

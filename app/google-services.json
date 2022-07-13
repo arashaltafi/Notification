@@ -8,6 +8,72 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:417769629842:android:1aa549a3222da9555a5e4b",
+        "android_client_info": {
+          "package_name": "com.arash.altafi.alertdialogfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417769629842-r8vq73jd6qvqtk96n91e236u5bk25rkn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arash.altafi.alertdialogfirebase",
+            "certificate_hash": "5fbb25e37ef842c088ad56a436deaf341a5d6bad"
+          }
+        },
+        {
+          "client_id": "417769629842-ltqe0of37ik4h38sb8bch0cg36kb27u8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbSz3dlUQHd0CJSD4WvCm7ZUbgFIMeSgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417769629842:android:fcadd5b0f1c172c55a5e4b",
+        "android_client_info": {
+          "package_name": "com.arash.altafi.chat2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417769629842-ltqe0of37ik4h38sb8bch0cg36kb27u8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbSz3dlUQHd0CJSD4WvCm7ZUbgFIMeSgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417769629842-jooa9jrvjo99qerq9c486u69egdi3q3u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:417769629842:android:159f2f18e1765bdd5a5e4b",
         "android_client_info": {
           "package_name": "com.arash.altafi.chattest"
