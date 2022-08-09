@@ -106,6 +106,17 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPushyNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="Pushy Notification"
+        android:layout_above="@+id/btnTestCrashlytics"
+        android:textColor="@color/white"
+        app:backgroundTint="#00B8D4" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnTestCrashlytics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
