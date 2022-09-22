@@ -1,4 +1,4 @@
-package com.arash.altafi.notification2
+package com.arash.altafi.notification2.pushy
 
 import me.pushy.sdk.Pushy
 import android.content.Intent

@@ -1,4 +1,4 @@
-package com.arash.altafi.notification2
+package com.arash.altafi.notification2.pushy
 
 import android.annotation.SuppressLint
 import android.app.Activity

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="rtl"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -109,10 +109,10 @@
         android:id="@+id/btnPushyNotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btnTestCrashlytics"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:text="Pushy Notification"
-        android:layout_above="@+id/btnTestCrashlytics"
         android:textColor="@color/white"
         app:backgroundTint="#00B8D4" />
 

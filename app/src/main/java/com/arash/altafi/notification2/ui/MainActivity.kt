@@ -1,11 +1,20 @@
-package com.arash.altafi.notification2
+package com.arash.altafi.notification2.ui
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.arash.altafi.notification2.*
+import com.arash.altafi.notification2.models.NotificationData
+import com.arash.altafi.notification2.models.PushNotification
+import com.arash.altafi.notification2.pushy.RegisterForPushNotificationsAsync
+import com.arash.altafi.notification2.remote.RetrofitInstance
+import com.arash.altafi.notification2.utils.Constants
+import com.arash.altafi.notification2.utils.FirebaseService
+import com.arash.altafi.notification2.utils.NotificationUtils
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
@@ -24,6 +33,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val extras = intent.extras
+        if (extras?.getBoolean("NotClick") == true) {
+            Toast.makeText(this, "test", Toast.LENGTH_SHORT).show()
+        }
 
         pushy()
 
@@ -65,6 +79,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSendS21FE.setOnClickListener {
+
+            NotificationUtils.test(this, 2)
+
             val title = etTitle.text.toString()
             val message = etMessage.text.toString()
             val image = etImage.text.toString()
@@ -80,6 +97,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSendEmulator29.setOnClickListener {
+
+            NotificationUtils.test(this, 1)
+
             val title = etTitle.text.toString()
             val message = etMessage.text.toString()
             val image = etImage.text.toString()

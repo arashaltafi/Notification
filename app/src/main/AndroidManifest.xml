@@ -38,7 +38,7 @@
 
         <!-- Pushy Notification Receiver -->
         <!-- Incoming push notifications will invoke the following BroadcastReceiver -->
-        <receiver android:name=".PushReceiver" android:exported="false">
+        <receiver android:name=".pushy.PushReceiver" android:exported="false">
             <intent-filter>
                 <!-- Do not modify this -->
                 <action android:name="pushy.me" />
@@ -74,7 +74,7 @@
         <!-- End Pushy Declarations -->
 
         <activity
-            android:name="com.arash.altafi.notification2.MainActivity"
+            android:name="com.arash.altafi.notification2.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

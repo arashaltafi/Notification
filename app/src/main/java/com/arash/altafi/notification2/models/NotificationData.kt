@@ -1,4 +1,4 @@
-package com.arash.altafi.notification2
+package com.arash.altafi.notification2.models
 
 data class NotificationData(
     val title: String,

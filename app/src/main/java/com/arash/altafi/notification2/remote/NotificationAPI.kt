@@ -1,7 +1,8 @@
-package com.arash.altafi.notification2
+package com.arash.altafi.notification2.remote
 
-import com.arash.altafi.notification2.Constants.Companion.CONTENT_TYPE
-import com.arash.altafi.notification2.Constants.Companion.SERVER_KEY
+import com.arash.altafi.notification2.utils.Constants.Companion.CONTENT_TYPE
+import com.arash.altafi.notification2.utils.Constants.Companion.SERVER_KEY
+import com.arash.altafi.notification2.models.PushNotification
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
