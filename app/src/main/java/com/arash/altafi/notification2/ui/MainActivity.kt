@@ -63,6 +63,14 @@ class MainActivity : AppCompatActivity() {
 
         FirebaseMessaging.getInstance().subscribeToTopic(topic)
 
+        btnTestGroup1.setOnClickListener {
+            NotificationUtils.test(this, 1)
+        }
+
+        btnTestGroup2.setOnClickListener {
+            NotificationUtils.test(this, 2)
+        }
+
         btnSend.setOnClickListener {
             val title = etTitle.text.toString()
             val message = etMessage.text.toString()
@@ -79,9 +87,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSendS21FE.setOnClickListener {
-
-            NotificationUtils.test(this, 2)
-
             val title = etTitle.text.toString()
             val message = etMessage.text.toString()
             val image = etImage.text.toString()
@@ -97,9 +102,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSendEmulator29.setOnClickListener {
-
-            NotificationUtils.test(this, 1)
-
             val title = etTitle.text.toString()
             val message = etMessage.text.toString()
             val image = etImage.text.toString()

@@ -25,6 +25,28 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTestGroup1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:text="Test Group 1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTestGroup2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test Group 2" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
         <EditText
             android:id="@+id/etTitle"
             android:layout_width="match_parent"
@@ -103,26 +125,32 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnPushyNotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnTestCrashlytics"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:text="Pushy Notification"
-        android:textColor="@color/white"
-        app:backgroundTint="#00B8D4" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnTestCrashlytics"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:text="Test Crashlytics"
-        android:textColor="@color/white"
-        app:backgroundTint="#EF5555" />
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPushyNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="2dp"
+            android:text="Pushy Notification"
+            android:textColor="@color/white"
+            app:backgroundTint="#00B8D4" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTestCrashlytics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="2dp"
+            android:text="Test Crashlytics"
+            android:textColor="@color/white"
+            app:backgroundTint="#EF5555" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </RelativeLayout>
