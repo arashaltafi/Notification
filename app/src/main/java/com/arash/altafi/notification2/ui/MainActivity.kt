@@ -7,14 +7,15 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.arash.altafi.notification2.*
+import com.arash.altafi.notification2.databinding.ActivityMainBinding
 import com.arash.altafi.notification2.models.NotificationData
 import com.arash.altafi.notification2.models.PushNotification
 import com.arash.altafi.notification2.pushy.RegisterForPushNotificationsAsync
 import com.arash.altafi.notification2.remote.RetrofitInstance
+import com.arash.altafi.notification2.ui.group.GroupActivity
+import com.arash.altafi.notification2.ui.replay.ReplayActivity
 import com.arash.altafi.notification2.utils.Constants
 import com.arash.altafi.notification2.utils.FirebaseService
-import com.arash.altafi.notification2.utils.NotificationUtils
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
@@ -26,13 +27,15 @@ import me.pushy.sdk.Pushy
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
     private val topic = "/topics/myTopic2"
     private var deviceToken: String? = null
     private lateinit var registerForPushNotificationsAsync: RegisterForPushNotificationsAsync
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val extras = intent.extras
         if (extras?.getBoolean("NotClick") == true) {
@@ -63,12 +66,12 @@ class MainActivity : AppCompatActivity() {
 
         FirebaseMessaging.getInstance().subscribeToTopic(topic)
 
-        btnTestGroup1.setOnClickListener {
-            NotificationUtils.test(this, 1)
+        btnTestGroup.setOnClickListener {
+            startActivity(Intent(this, GroupActivity::class.java))
         }
 
-        btnTestGroup2.setOnClickListener {
-            NotificationUtils.test(this, 2)
+        btnTestReplay.setOnClickListener {
+            startActivity(Intent(this, ReplayActivity::class.java))
         }
 
         btnSend.setOnClickListener {
@@ -76,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             val message = etMessage.text.toString()
             val image = etImage.text.toString()
             val recipientToken = etToken.text.toString()
-            if(title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
+            if (title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
                 PushNotification(
                     NotificationData(title, message, image),
                     topic
@@ -91,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             val message = etMessage.text.toString()
             val image = etImage.text.toString()
             val recipientToken = etToken.text.toString()
-            if(title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
+            if (title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
                 PushNotification(
                     NotificationData(title, message, image),
                     Constants.PHONE_S21_FE_TOKEN
@@ -106,7 +109,7 @@ class MainActivity : AppCompatActivity() {
             val message = etMessage.text.toString()
             val image = etImage.text.toString()
             val recipientToken = etToken.text.toString()
-            if(title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
+            if (title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
                 PushNotification(
                     NotificationData(title, message, image),
                     Constants.EMULATOR_API_29_TOKEN
@@ -121,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             val message = etMessage.text.toString()
             val image = etImage.text.toString()
             val recipientToken = etToken.text.toString()
-            if(title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
+            if (title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
                 PushNotification(
                     NotificationData(title, message, image),
                     recipientToken
@@ -162,16 +165,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
-        try {
-            val response = RetrofitInstance.api.postNotification(notification)
-            if(response.isSuccessful) {
-                Log.d("test123321", "Response Successful: ${Gson().toJson(response)}")
-            } else {
-                Log.e("test123321", "Response Error: ${response.errorBody()}")
+    private fun sendNotification(notification: PushNotification) =
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitInstance.api.postNotification(notification)
+                if (response.isSuccessful) {
+                    Log.d("test123321", "Response Successful: ${Gson().toJson(response)}")
+                } else {
+                    Log.e("test123321", "Response Error: ${response.errorBody()}")
+                }
+            } catch (e: Exception) {
+                Log.e("test123321", "Exception: $e")
             }
-        } catch(e: Exception) {
-            Log.e("test123321", "Exception: $e")
         }
-    }
 }

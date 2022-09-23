@@ -14,7 +14,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.arash.altafi.notification2.R
 import com.arash.altafi.notification2.ui.MainActivity
-import com.arash.altafi.notification2.utils.Constants.Companion.CHANNEL_ID
+import com.arash.altafi.notification2.utils.Constants.CHANNEL_ID
 import com.google.firebase.messaging.RemoteMessage
 import java.io.IOException
 import java.net.URL
@@ -23,7 +23,7 @@ object NotificationUtils {
 
     private var value = 0
     private var defaultId = -1
-    var inboxStyle = NotificationCompat.InboxStyle()
+    private var inboxStyle = NotificationCompat.InboxStyle()
 
     fun sendNotification(context: Context, message: RemoteMessage) {
         value++
@@ -131,7 +131,11 @@ object NotificationUtils {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(notificationManager: NotificationManager) {
         val channelName = "channelName"
-        val channel = NotificationChannel(CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_HIGH).apply {
+        val channel = NotificationChannel(
+            CHANNEL_ID,
+            channelName,
+            NotificationManager.IMPORTANCE_HIGH
+        ).apply {
             description = "My channel description"
             enableLights(true)
             lightColor = Color.GREEN

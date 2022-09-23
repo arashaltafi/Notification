@@ -4,13 +4,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH"/>
+    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -19,60 +20,83 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PushNotification2">
+        <activity
+            android:name=".ui.replay.replay2.SecondActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.replay.replay1.ActionButtonOne"
+            android:exported="false" />
+        <activity
+            android:name=".ui.replay.replay1.ActionButtonTwo"
+            android:exported="false" />
+        <activity
+            android:name=".ui.replay.replay1.TapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.replay.replay3.SampleReplayActivity3"
+            android:exported="false" />
+        <activity
+            android:name=".ui.replay.replay2.SampleReplayActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".ui.replay.replay1.SampleReplayActivity1"
+            android:exported="false" />
+        <activity
+            android:name=".ui.replay.ReplayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.group.GroupActivity"
+            android:exported="false" />
 
         <service
             android:name="com.arash.altafi.notification2.utils.FirebaseService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="my_channel" />
-
-        <!-- Pushy Declarations -->
-
+            android:value="my_channel" /> <!-- Pushy Declarations -->
         <!-- Pushy Notification Receiver -->
         <!-- Incoming push notifications will invoke the following BroadcastReceiver -->
-        <receiver android:name=".pushy.PushReceiver" android:exported="false">
+        <receiver
+            android:name=".pushy.PushReceiver"
+            android:exported="false">
             <intent-filter>
+
                 <!-- Do not modify this -->
                 <action android:name="pushy.me" />
             </intent-filter>
-        </receiver>
-
-        <!-- Pushy Update Receiver -->
+        </receiver> <!-- Pushy Update Receiver -->
         <!-- Do not modify - internal BroadcastReceiver that restarts the listener service -->
-        <receiver android:name="me.pushy.sdk.receivers.PushyUpdateReceiver" android:exported="false">
+        <receiver
+            android:name="me.pushy.sdk.receivers.PushyUpdateReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
-        </receiver>
-
-        <!-- Pushy Boot Receiver -->
+        </receiver> <!-- Pushy Boot Receiver -->
         <!-- Do not modify - internal BroadcastReceiver that restarts the listener service -->
-        <receiver android:name="me.pushy.sdk.receivers.PushyBootReceiver" android:exported="false">
+        <receiver
+            android:name="me.pushy.sdk.receivers.PushyBootReceiver"
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-        </receiver>
-
-        <!-- Pushy Socket Service -->
+        </receiver> <!-- Pushy Socket Service -->
         <!-- Do not modify - internal service -->
-        <service android:name="me.pushy.sdk.services.PushySocketService" android:stopWithTask="false" />
-
-        <!-- Pushy Job Service (added in Pushy SDK 1.0.35) -->
+        <service
+            android:name="me.pushy.sdk.services.PushySocketService"
+            android:stopWithTask="false" /> <!-- Pushy Job Service (added in Pushy SDK 1.0.35) -->
         <!-- Do not modify - internal service -->
-        <service android:name="me.pushy.sdk.services.PushyJobService"
+        <service
+            android:name="me.pushy.sdk.services.PushyJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
-            android:stopWithTask="false" />
-
-        <!-- End Pushy Declarations -->
-
+            android:stopWithTask="false" /> <!-- End Pushy Declarations -->
         <activity
             android:name="com.arash.altafi.notification2.ui.MainActivity"
             android:exported="true">

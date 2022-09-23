@@ -1,6 +1,6 @@
 package com.arash.altafi.notification2.remote
 
-import com.arash.altafi.notification2.utils.Constants.Companion.BASE_URL
+import com.arash.altafi.notification2.utils.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,7 +14,7 @@ class RetrofitInstance {
                 .build()
         }
 
-        val api by lazy {
+        val api: NotificationAPI by lazy {
             retrofit.create(NotificationAPI::class.java)
         }
     }
