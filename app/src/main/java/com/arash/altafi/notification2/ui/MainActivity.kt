@@ -16,6 +16,7 @@ import com.arash.altafi.notification2.ui.group.GroupActivity
 import com.arash.altafi.notification2.ui.replay.ReplayActivity
 import com.arash.altafi.notification2.utils.Constants
 import com.arash.altafi.notification2.service.FirebaseService
+import com.arash.altafi.notification2.ui.messenging.MessengingActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
@@ -72,6 +73,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTestReplay.setOnClickListener {
             startActivity(Intent(this, ReplayActivity::class.java))
+        }
+
+        btnTestMessenging.setOnClickListener {
+            startActivity(Intent(this, MessengingActivity::class.java))
         }
 
         btnSend.setOnClickListener {

@@ -30,18 +30,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_weight="3"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnTestReplay"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
                 android:text="Test Replay" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTestMessenging"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:text="Test Messenging" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnTestGroup"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Test Group" />
 

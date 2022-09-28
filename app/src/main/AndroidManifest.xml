@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PushNotification2">
         <activity
+            android:name=".ui.messenging.MessengingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.replay.replay2.SecondActivity"
             android:exported="false" />
         <activity

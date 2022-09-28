@@ -13,6 +13,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.arash.altafi.notification2.R
+import com.arash.altafi.notification2.models.ChatData
 import com.arash.altafi.notification2.models.MyNotificationModel
 import com.arash.altafi.notification2.ui.MainActivity
 import com.arash.altafi.notification2.utils.Constants.CHANNEL_ID
@@ -134,6 +135,52 @@ object NotificationUtils {
             lightColor = Color.GREEN
         }
         notificationManager.createNotificationChannel(channel)
+    }
+
+    fun messengingNotification(context: Context, nId: Int, list: MutableList<ChatData>) {
+
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationUtils.createNotificationChannel(notificationManager)
+        }
+
+        val messagingStyle =
+            NotificationCompat.MessagingStyle("me").setConversationTitle("GroupChat")
+        for (i in list) {
+            messagingStyle.addMessage(
+                NotificationCompat.MessagingStyle.Message(
+                    i.message,
+                    i.t,
+                    i.username
+                )
+            )
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            Intent(context, MainActivity::class.java),
+            (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE
+            else 0x0)
+                    or
+                    PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val notificationCompat = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_android_black_24dp)
+            .setContentTitle("User1")
+            .setContentText("hi...san")
+            .setSubText("ChatApp")
+            .setStyle(messagingStyle)
+            .setOnlyAlertOnce(true)
+            .setContentIntent(pendingIntent)
+            .setOnlyAlertOnce(true)
+            .setColor(Color.GREEN)
+            .build()
+
+        notificationManager.notify(nId, notificationCompat)
     }
 
 }
