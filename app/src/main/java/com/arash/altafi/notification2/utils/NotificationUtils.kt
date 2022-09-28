@@ -13,6 +13,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.arash.altafi.notification2.R
+import com.arash.altafi.notification2.models.MyNotificationModel
 import com.arash.altafi.notification2.ui.MainActivity
 import com.arash.altafi.notification2.utils.Constants.CHANNEL_ID
 import com.google.firebase.messaging.RemoteMessage
@@ -21,21 +22,14 @@ import java.net.URL
 
 object NotificationUtils {
 
-    private var value = 0
-    private var defaultId = -1
-    private var inboxStyle = NotificationCompat.InboxStyle()
-
-    fun sendNotification(context: Context, message: RemoteMessage) {
-        value++
-        val notificationID = 1
+    fun sendNotification(context: Context, body: MyNotificationModel, message: RemoteMessage) {
+        val notificationID = message.data["notification_id"]?.toInt() ?: 1
+        Log.i("987564", "sendNotification: $notificationID")
+        val inboxStyle = NotificationCompat.InboxStyle()
 
         val intent = Intent(context, MainActivity::class.java)
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        if (defaultId != notificationID) {
-            inboxStyle = NotificationCompat.InboxStyle()
-        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(notificationManager)
@@ -64,13 +58,18 @@ object NotificationUtils {
                     PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        inboxStyle.setBigContentTitle("Content Text $notificationID")
-        inboxStyle.setSummaryText("summary Text $notificationID")
-        inboxStyle.addLine("line$value")
+        body.body.forEach {
+            inboxStyle.setBigContentTitle("${message.data["title"]} $notificationID")
+            inboxStyle.setSummaryText("${message.data["title"]} $notificationID")
+            inboxStyle.addLine(it)
+        }
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_android_black_24dp)
+            .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
             .setGroup(notificationID.toString())
+            .setContentTitle(message.data["title"])
+            .setContentText(body.body.last())
             .setLargeIcon(image)
             .setAutoCancel(true)
             .setStyle(inboxStyle)
@@ -78,18 +77,10 @@ object NotificationUtils {
             .setContentIntent(pendingIntent)
 
         notificationManager.notify(notificationID, notification.build())
-
-        defaultId = notificationID
     }
 
-    fun test(context: Context, notificationID: Int) {
-
-        if (defaultId != notificationID) {
-            inboxStyle = NotificationCompat.InboxStyle()
-            value = 0
-        }
-
-        value++
+    fun test(context: Context, list: ArrayList<String>, notificationID: Int) {
+        val inboxStyle = NotificationCompat.InboxStyle()
 
         val intent = Intent(context, MainActivity::class.java)
         val notificationManager =
@@ -111,21 +102,23 @@ object NotificationUtils {
                     PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        inboxStyle.setBigContentTitle("Content Text $notificationID")
-        inboxStyle.setSummaryText("summary Text $notificationID")
-        inboxStyle.addLine("line$value")
+        list.forEach {
+            inboxStyle.setBigContentTitle("Content Text $notificationID")
+            inboxStyle.setSummaryText("summary Text $notificationID")
+            inboxStyle.addLine(it)
+        }
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_android_black_24dp)
             .setGroup(notificationID.toString())
+            .setContentTitle("title")
+            .setContentText(list.last())
             .setAutoCancel(true)
             .setStyle(inboxStyle)
             .setGroupSummary(false)
             .setContentIntent(pendingIntent)
 
         notificationManager.notify(notificationID, notification.build())
-
-        defaultId = notificationID
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

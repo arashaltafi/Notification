@@ -19,11 +19,15 @@ class GroupActivity : AppCompatActivity() {
 
     private fun init() {
         binding.apply {
+            val list1 = arrayListOf("1 1", "1 2", "1 3", "1 4", "1 5", "1 6")
+            val list2 = arrayListOf("2 1", "2 2", "2 3", "2 4", "2 5", "2 6")
             btnNotificationGroup1.setOnClickListener {
-                NotificationUtils.test(this@GroupActivity, 1)
+                list1.add("1 7")
+                NotificationUtils.test(this@GroupActivity, list1,1)
             }
             btnNotificationGroup2.setOnClickListener {
-                NotificationUtils.test(this@GroupActivity, 2)
+                list2.add("2 7")
+                NotificationUtils.test(this@GroupActivity, list2,2)
             }
         }
     }

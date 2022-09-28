@@ -15,7 +15,7 @@ import com.arash.altafi.notification2.remote.RetrofitInstance
 import com.arash.altafi.notification2.ui.group.GroupActivity
 import com.arash.altafi.notification2.ui.replay.ReplayActivity
 import com.arash.altafi.notification2.utils.Constants
-import com.arash.altafi.notification2.utils.FirebaseService
+import com.arash.altafi.notification2.service.FirebaseService
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
