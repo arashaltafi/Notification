@@ -53,3 +53,13 @@ fun createNotificationChannel(notificationManagerCompat: NotificationManagerComp
         notificationManagerCompat.createNotificationChannel(channel)
     }
 }
+
+inline fun <reified NEW> Any.cast(): NEW? {
+    return if (this.isCastable<NEW>())
+        this as NEW
+    else null
+}
+
+inline fun <reified NEW> Any.isCastable(): Boolean {
+    return this is NEW
+}

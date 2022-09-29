@@ -2,7 +2,7 @@ package com.arash.altafi.notification2.service
 
 import android.content.SharedPreferences
 import android.util.Log
-import com.arash.altafi.notification2.models.MyNotificationModel
+import com.arash.altafi.notification2.models.*
 import com.arash.altafi.notification2.utils.JsonUtils
 import com.arash.altafi.notification2.utils.NotificationUtils
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -37,20 +37,26 @@ class FirebaseService : FirebaseMessagingService() {
 
         Log.i("test123321", "onMessageReceived: ${message.data["body"]}")
 
-        val list = jsonUtils.getObject<MyNotificationModel>(message.data["body"].toString())
-        Log.i("test123321", "list: $list")
+        val type = message.data["type"].toString()
 
-        NotificationUtils.sendNotification(this, list, message)
+        if (type == "2") {
+            val notificationList = jsonUtils.getObject<MyNotificationModel>(message.data["body"].toString())
+            Log.i("test123321", "notificationList: $notificationList")
+            NotificationUtils.sendNotification(this, notificationList, message)
+        } else {
+            val notificationMessageList = jsonUtils.getObject<NotificationMessageModel>(message.data["body"].toString())
+            Log.i("test123321", "notificationMessageList: $notificationMessageList")
+            val list: MutableList<ChatData> = mutableListOf()
+            notificationMessageList.message.forEach {
+                list.add(ChatData(message = it))
+            }
+            notificationMessageList.username.forEach {
+                list.add(ChatData(username = it))
+            }
+            notificationMessageList.time.forEach {
+                list.add(ChatData(time = it.toLong()))
+            }
+            NotificationUtils.sendMessageNotification(this, list, message)
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

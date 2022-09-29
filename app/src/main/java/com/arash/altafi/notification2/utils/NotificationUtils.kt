@@ -84,7 +84,96 @@ object NotificationUtils {
         notificationManager.notify(notificationID, notification.build())
     }
 
-    fun test(context: Context, list: ArrayList<String>, notificationID: Int) {
+    @SuppressLint("RestrictedApi")
+    fun sendMessageNotification(
+        context: Context,
+        list: MutableList<ChatData>,
+        message: RemoteMessage
+    ) {
+        val notificationID = message.data["notification_id"]?.toInt() ?: 1
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(notificationManager)
+        }
+
+        val messagingStyle = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val personStyle = Person.Builder()
+                .setName("me")
+                .setIcon(
+                    IconCompat.createFromIcon(
+                        Icon.createWithResource(
+                            context,
+                            R.drawable.ic_launcher_foreground
+                        )
+                    )
+                )
+                .build()
+            NotificationCompat.MessagingStyle(personStyle).setConversationTitle("GroupChat")
+        } else {
+            NotificationCompat.MessagingStyle("me").setConversationTitle("GroupChat")
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            for (i in list) {
+                val person = Person.Builder()
+                    .setName(i.username)
+                    .setIcon(
+                        IconCompat.createFromIcon(
+                            Icon.createWithResource(
+                                context,
+                                R.drawable.ic_android_black_24dp
+                            )
+                        )
+                    )
+                    .build()
+                messagingStyle.addMessage(
+                    NotificationCompat.MessagingStyle.Message(
+                        i.message,
+                        i.time ?: System.currentTimeMillis(),
+                        person
+                    )
+                )
+            }
+        } else {
+            for (i in list) {
+                messagingStyle.addMessage(
+                    NotificationCompat.MessagingStyle.Message(
+                        i.message,
+                        i.time ?: System.currentTimeMillis(),
+                        i.username
+                    )
+                )
+            }
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            Intent(context, MainActivity::class.java),
+            (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE
+            else 0x0)
+                    or
+                    PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val notificationCompat = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_android_black_24dp)
+            .setContentTitle("ContentTitle")
+            .setContentText("ContentText")
+            .setSubText("SubText")
+            .setStyle(messagingStyle)
+            .setOnlyAlertOnce(true)
+            .setContentIntent(pendingIntent)
+            .setOnlyAlertOnce(true)
+            .setColor(Color.GREEN)
+            .build()
+
+        notificationManager.notify(notificationID, notificationCompat)
+    }
+
+    fun testGroup(context: Context, list: ArrayList<String>, notificationID: Int) {
         val inboxStyle = NotificationCompat.InboxStyle()
 
         val intent = Intent(context, MainActivity::class.java)
@@ -126,23 +215,8 @@ object NotificationUtils {
         notificationManager.notify(notificationID, notification.build())
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel(notificationManager: NotificationManager) {
-        val channelName = "channelName"
-        val channel = NotificationChannel(
-            CHANNEL_ID,
-            channelName,
-            NotificationManager.IMPORTANCE_HIGH
-        ).apply {
-            description = "My channel description"
-            enableLights(true)
-            lightColor = Color.GREEN
-        }
-        notificationManager.createNotificationChannel(channel)
-    }
-
     @SuppressLint("RestrictedApi")
-    fun messengingNotification(context: Context, nId: Int, list: MutableList<ChatData>) {
+    fun testMessengingNotification(context: Context, nId: Int, list: MutableList<ChatData>) {
 
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -154,7 +228,14 @@ object NotificationUtils {
         val messagingStyle = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val personStyle = Person.Builder()
                 .setName("me")
-                .setIcon(IconCompat.createFromIcon(Icon.createWithResource(context, R.drawable.ic_launcher_foreground)))
+                .setIcon(
+                    IconCompat.createFromIcon(
+                        Icon.createWithResource(
+                            context,
+                            R.drawable.ic_launcher_foreground
+                        )
+                    )
+                )
                 .build()
             NotificationCompat.MessagingStyle(personStyle).setConversationTitle("GroupChat")
         } else {
@@ -165,12 +246,19 @@ object NotificationUtils {
             for (i in list) {
                 val person = Person.Builder()
                     .setName(i.username)
-                    .setIcon(IconCompat.createFromIcon(Icon.createWithResource(context, R.drawable.ic_android_black_24dp)))
+                    .setIcon(
+                        IconCompat.createFromIcon(
+                            Icon.createWithResource(
+                                context,
+                                R.drawable.ic_android_black_24dp
+                            )
+                        )
+                    )
                     .build()
                 messagingStyle.addMessage(
                     NotificationCompat.MessagingStyle.Message(
                         i.message,
-                        i.t,
+                        i.time ?: System.currentTimeMillis(),
                         person
                     )
                 )
@@ -180,7 +268,7 @@ object NotificationUtils {
                 messagingStyle.addMessage(
                     NotificationCompat.MessagingStyle.Message(
                         i.message,
-                        i.t,
+                        i.time ?: System.currentTimeMillis(),
                         i.username
                     )
                 )
@@ -210,6 +298,21 @@ object NotificationUtils {
             .build()
 
         notificationManager.notify(nId, notificationCompat)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel(notificationManager: NotificationManager) {
+        val channelName = "channelName"
+        val channel = NotificationChannel(
+            CHANNEL_ID,
+            channelName,
+            NotificationManager.IMPORTANCE_HIGH
+        ).apply {
+            description = "My channel description"
+            enableLights(true)
+            lightColor = Color.GREEN
+        }
+        notificationManager.createNotificationChannel(channel)
     }
 
 }
