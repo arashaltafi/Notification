@@ -1,5 +1,6 @@
 package com.arash.altafi.notification2.utils
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -8,10 +9,13 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.Icon
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.core.app.Person
+import androidx.core.graphics.drawable.IconCompat
 import com.arash.altafi.notification2.R
 import com.arash.altafi.notification2.models.ChatData
 import com.arash.altafi.notification2.models.MyNotificationModel
@@ -137,25 +141,50 @@ object NotificationUtils {
         notificationManager.createNotificationChannel(channel)
     }
 
+    @SuppressLint("RestrictedApi")
     fun messengingNotification(context: Context, nId: Int, list: MutableList<ChatData>) {
 
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationUtils.createNotificationChannel(notificationManager)
+            createNotificationChannel(notificationManager)
         }
 
-        val messagingStyle =
+        val messagingStyle = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val personStyle = Person.Builder()
+                .setName("me")
+                .setIcon(IconCompat.createFromIcon(Icon.createWithResource(context, R.drawable.ic_launcher_foreground)))
+                .build()
+            NotificationCompat.MessagingStyle(personStyle).setConversationTitle("GroupChat")
+        } else {
             NotificationCompat.MessagingStyle("me").setConversationTitle("GroupChat")
-        for (i in list) {
-            messagingStyle.addMessage(
-                NotificationCompat.MessagingStyle.Message(
-                    i.message,
-                    i.t,
-                    i.username
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            for (i in list) {
+                val person = Person.Builder()
+                    .setName(i.username)
+                    .setIcon(IconCompat.createFromIcon(Icon.createWithResource(context, R.drawable.ic_android_black_24dp)))
+                    .build()
+                messagingStyle.addMessage(
+                    NotificationCompat.MessagingStyle.Message(
+                        i.message,
+                        i.t,
+                        person
+                    )
                 )
-            )
+            }
+        } else {
+            for (i in list) {
+                messagingStyle.addMessage(
+                    NotificationCompat.MessagingStyle.Message(
+                        i.message,
+                        i.t,
+                        i.username
+                    )
+                )
+            }
         }
 
         val pendingIntent = PendingIntent.getActivity(
