@@ -64,8 +64,8 @@ object NotificationUtils {
         )
 
         body.body.forEach {
-            inboxStyle.setBigContentTitle("${message.data["title"]} $notificationID")
-            inboxStyle.setSummaryText("${message.data["title"]} $notificationID")
+            inboxStyle.setBigContentTitle("${message.data["title"]}")
+            inboxStyle.setSummaryText(body.body.count().toString())
             inboxStyle.addLine(it)
         }
 
@@ -198,7 +198,7 @@ object NotificationUtils {
 
         list.forEach {
             inboxStyle.setBigContentTitle("Content Text $notificationID")
-            inboxStyle.setSummaryText("summary Text $notificationID")
+            inboxStyle.setSummaryText(list.count().toString())
             inboxStyle.addLine(it)
         }
 
