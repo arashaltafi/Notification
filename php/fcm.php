@@ -9,7 +9,7 @@ class FCM {
   public function create_topic($token_id, $topic_id) {
 	  $url = 'https://iid.googleapis.com/iid/v1:batchAdd';
 	  // Firebase API Key
-      $headers = array('FIREBASE_API_KEY','Content-Type:application/json');
+      $headers = array('Authorization:key=AAAAYUUCqJI:APA91bFgqidAAGsT7hhptyJLNr04k9ycJwGglsNxxN_3KHqdv32Qyptm_hzIlVeGRMWxXmewqmK8UeoAYxIc8j5stU0UMkSA2TE-UvuzuDW2XZ-Jxji9VCjfkxI0eC4_XGQoR6RjE6-i','Content-Type:application/json');
       $fields = array('to' => $topic_id,'registration_tokens' => $token_id);
 	  // Open connection
       $ch = curl_init();
@@ -45,7 +45,7 @@ class FCM {
       }
 	  
       // Firebase API Key
-      $headers = array('FIREBASE_API_KEY','Content-Type:application/json');
+      $headers = array('Authorization:key=AAAAYUUCqJI:APA91bFgqidAAGsT7hhptyJLNr04k9ycJwGglsNxxN_3KHqdv32Qyptm_hzIlVeGRMWxXmewqmK8UeoAYxIc8j5stU0UMkSA2TE-UvuzuDW2XZ-Jxji9VCjfkxI0eC4_XGQoR6RjE6-i','Content-Type:application/json');
      
 	  // Open connection
       $ch = curl_init();

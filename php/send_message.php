@@ -9,19 +9,28 @@ if(isset($_POST["nId"]))
 	// INCLUDE YOUR FCM FILE
 	include_once 'fcm.php';    
 
-	$bodyNotification= array("test 1", "test 2", "test 3");
+
+	$username= array("Arash Altafi", "Ali Rezaei", "Hasan Jafari");
+	$message= array("test message 1", "test message 2", "test message 3");
+	$time= array("1664483217784", "1664483217784", "1664483217784");
+	
 	$statictic=array();
-    $record["body"]= $bodyNotification;
+    $record["username"]= $username;
+    $record["message"]= $message;
+    $record["time"]= $time;
+    
 	$statictic=$record;
     $body = JSON_encode($statictic);
 
+
 	$arrNotification["priority"] = "HIGH";				
 	$arrNotification["body"] = $body;
-	$arrNotification["title"] = "PHP Push Notification";
+	$arrNotification["title"] = "Message Notification";
 	$arrNotification["sound"] = "default";
-	$arrNotification["notification_id"] = "2";
-	$arrNotification["type"] = 2;
+	$arrNotification["notification_id"] = "1";
+	$arrNotification["type"] = 1;
 	$arrNotification["image"] = "https://arashaltafi.ir/arash.jpg";
+    
 
 	$fcm = new FCM();
 	$result = $fcm->send_notification($regId, $arrNotification, $nType);

@@ -62,6 +62,38 @@
         </form>
       </div>
     </div>
+    
+    <br/>
+	<br/>
+	<br/>
+    <!-- Send Notification -->
+    <div class="row">
+      <div class="col-md-9">
+        <form action="send_message.php" method="post" accept-charset="utf-8">
+
+          <div class="form-group">
+            <label for="formGroupExampleInput">Notification Message</label>
+              <select class="form-control" id="notification_type" name="notification_type" required="">
+              <option value="">Select Notification Type</option>
+               
+                    <option value="Specific">Send Notification Specific</option>
+                    <option value="Topic">Send Notification Topic</option>
+  
+              </select>
+          </div>           
+
+          <div class="form-group">
+            <label for="formGroupExampleInput">Token / Topic</label>
+            <input type="text" name="nId" class="form-control" id="formGroupExampleInput" placeholder="Please enter token or topic" required="">
+            
+          </div> 
+
+          <div class="form-group">
+           <button type="submit" id="send_message" class="btn btn-success">Send Notification Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
  
 </div>
 </body>
