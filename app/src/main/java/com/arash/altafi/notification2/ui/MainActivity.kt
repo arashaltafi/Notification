@@ -17,6 +17,7 @@ import com.arash.altafi.notification2.ui.replay.ReplayActivity
 import com.arash.altafi.notification2.utils.Constants
 import com.arash.altafi.notification2.service.FirebaseService
 import com.arash.altafi.notification2.ui.messenging.MessengingActivity
+import com.arash.altafi.notification2.ui.progress.ProgressActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
@@ -77,6 +78,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTestMessenging.setOnClickListener {
             startActivity(Intent(this, MessengingActivity::class.java))
+        }
+
+        btnTestProgress.setOnClickListener {
+            startActivity(Intent(this, ProgressActivity::class.java))
         }
 
         btnSend.setOnClickListener {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -12,6 +13,7 @@ import android.graphics.Color
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.util.Log
+import androidx.annotation.IntRange
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.Person
@@ -171,6 +173,38 @@ object NotificationUtils {
             .build()
 
         notificationManager.notify(notificationID, notificationCompat)
+    }
+
+    fun progressNotification(
+        context: Context,
+        channelId: String,
+        @IntRange(from = 0, to = 100)
+        progress: Int = 0,
+        isDownload: Boolean
+    ) {
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        val notificationBuilder = NotificationCompat.Builder(context, channelId)
+        val icon = if (isDownload) R.drawable.ic_baseline_file_download_24 else R.drawable.ic_baseline_file_upload_24
+        val lockCancel: Boolean = progress < 100
+        val indeterminate: Boolean = progress == 0
+        val finish = if (isDownload) "دانلود با موفقیت به پایان رسید" else "آپلود با موفقیت به پایان رسید"
+        val description = if (progress >= 100) finish else "$progress kb"
+        val title = if (isDownload) "در حال دانلود ..." else "در حال آپلود ..."
+
+        notificationBuilder
+            .setChannelId(channelId)
+            .setSmallIcon(icon)
+            .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
+            .setContentTitle(setPersianDigits(title))
+            .setContentText(setPersianDigits(description))
+            .setAutoCancel(true)
+            .setOnlyAlertOnce(true)
+            .setOngoing(lockCancel)
+            .setProgress(100, progress, indeterminate)
+
+        notificationManager.notify(999, notificationBuilder.build())
     }
 
     fun testGroup(context: Context, list: ArrayList<String>, notificationID: Int) {
