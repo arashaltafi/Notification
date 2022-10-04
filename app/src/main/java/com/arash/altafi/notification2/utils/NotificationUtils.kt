@@ -176,6 +176,7 @@ object NotificationUtils {
     }
 
     fun progressNotification(
+        notificationID: Int,
         context: Context,
         channelId: String,
         @IntRange(from = 0, to = 100)
@@ -204,7 +205,7 @@ object NotificationUtils {
             .setOngoing(lockCancel)
             .setProgress(100, progress, indeterminate)
 
-        notificationManager.notify(999, notificationBuilder.build())
+        notificationManager.notify(notificationID, notificationBuilder.build())
     }
 
     fun testGroup(context: Context, list: ArrayList<String>, notificationID: Int) {

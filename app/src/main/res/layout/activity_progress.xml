@@ -10,9 +10,15 @@
     tools:context=".ui.progress.ProgressActivity">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnNotificationProgress1"
+        android:id="@+id/btnNotificationProgressUpload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Progress Notification 1" />
+        android:text="Progress Upload" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNotificationProgressDownload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Progress Download" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
