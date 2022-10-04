@@ -1,10 +1,7 @@
 package com.arash.altafi.notification2.utils
 
 import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -198,6 +195,8 @@ object NotificationUtils {
         notificationBuilder
             .setChannelId(channelId)
             .setSmallIcon(icon)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(Notification.CATEGORY_SERVICE)
             .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
             .setContentTitle(setPersianDigits(title))
             .setContentText(setPersianDigits(description))
