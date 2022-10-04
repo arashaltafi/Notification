@@ -190,9 +190,10 @@ object NotificationUtils {
         val icon = if (isDownload) R.drawable.ic_baseline_file_download_24 else R.drawable.ic_baseline_file_upload_24
         val lockCancel: Boolean = progress < 100
         val indeterminate: Boolean = progress == 0
+        val description = if (progress >= 100) "" else "$progress kb"
         val finish = if (isDownload) "دانلود با موفقیت به پایان رسید" else "آپلود با موفقیت به پایان رسید"
-        val description = if (progress >= 100) finish else "$progress kb"
-        val title = if (isDownload) "در حال دانلود ..." else "در حال آپلود ..."
+        val titleNotification = if (isDownload) "در حال دانلود ..." else "در حال آپلود ..."
+        val title = if (progress >= 100) finish else titleNotification
 
         notificationBuilder
             .setChannelId(channelId)
