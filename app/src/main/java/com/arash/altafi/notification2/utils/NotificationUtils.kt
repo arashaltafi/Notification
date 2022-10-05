@@ -24,7 +24,7 @@ import com.arash.altafi.notification2.R
 import com.arash.altafi.notification2.models.ChatData
 import com.arash.altafi.notification2.models.MyNotificationModel
 import com.arash.altafi.notification2.ui.MainActivity
-import com.arash.altafi.notification2.ui.media.MediaActivity
+import com.arash.altafi.notification2.ui.media.media1.Media1Activity
 import com.arash.altafi.notification2.utils.Constants.CHANNEL_ID
 import com.google.firebase.messaging.RemoteMessage
 import java.io.IOException
@@ -282,7 +282,7 @@ object NotificationUtils {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val intent = Intent(context, MediaActivity::class.java)
+        val intent = Intent(context, Media1Activity::class.java)
         val pendingIntent: PendingIntent = PendingIntent.getActivity(
             context, 0, intent,
             getPendingIntentFlags(true)

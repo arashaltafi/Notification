@@ -24,6 +24,12 @@
             android:name=".ui.media.MediaActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.media.media2.Media2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.media.media1.Media1Activity"
+            android:exported="false" />
+        <activity
             android:name=".ui.progress.ProgressActivity"
             android:exported="false" />
         <activity

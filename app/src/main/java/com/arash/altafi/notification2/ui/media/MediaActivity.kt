@@ -1,9 +1,11 @@
 package com.arash.altafi.notification2.ui.media
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.arash.altafi.notification2.databinding.ActivityMediaBinding
-import com.arash.altafi.notification2.utils.NotificationUtils
+import com.arash.altafi.notification2.ui.media.media1.Media1Activity
+import com.arash.altafi.notification2.ui.media.media2.Media2Activity
 
 class MediaActivity : AppCompatActivity() {
 
@@ -19,12 +21,11 @@ class MediaActivity : AppCompatActivity() {
 
     private fun init() {
         binding.apply {
-            btnNotificationMedia1.setOnClickListener {
-                NotificationUtils.mediaNotification(
-                    this@MediaActivity,
-                    "تست عنوان",
-                    "تست توضیحات"
-                )
+            btnMedia1.setOnClickListener {
+                startActivity(Intent(this@MediaActivity, Media1Activity::class.java))
+            }
+            btnMedia2.setOnClickListener {
+                startActivity(Intent(this@MediaActivity, Media2Activity::class.java))
             }
         }
     }
