@@ -9,6 +9,9 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.Icon
 import android.os.Build
+import android.support.v4.media.MediaMetadataCompat
+import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
 import androidx.annotation.IntRange
 import androidx.annotation.RequiresApi
@@ -19,6 +22,7 @@ import com.arash.altafi.notification2.R
 import com.arash.altafi.notification2.models.ChatData
 import com.arash.altafi.notification2.models.MyNotificationModel
 import com.arash.altafi.notification2.ui.MainActivity
+import com.arash.altafi.notification2.ui.media.MediaActivity
 import com.arash.altafi.notification2.utils.Constants.CHANNEL_ID
 import com.google.firebase.messaging.RemoteMessage
 import java.io.IOException
@@ -206,6 +210,62 @@ object NotificationUtils {
             .setProgress(100, progress, indeterminate)
 
         notificationManager.notify(notificationID, notificationBuilder.build())
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    fun mediaNotification(
+        context: Context,
+        title: String,
+        description: String
+    ) {
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        val intent = Intent(context, MediaActivity::class.java)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            context, 0, intent,
+            getPendingIntentFlags(true)
+        )
+
+        val builder = MediaMetadataCompat.Builder()
+
+        val playbackStateCompat = PlaybackStateCompat.Builder()
+            .setActions(
+                PlaybackStateCompat.ACTION_PLAY or PlaybackStateCompat.ACTION_PLAY_PAUSE or
+                PlaybackStateCompat.ACTION_FAST_FORWARD or PlaybackStateCompat.ACTION_REWIND or
+                PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID or PlaybackStateCompat.ACTION_PAUSE or
+                PlaybackStateCompat.ACTION_SKIP_TO_NEXT or PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
+                PlaybackStateCompat.ACTION_SEEK_TO
+            )
+            .setState(PlaybackStateCompat.STATE_PLAYING, 0, 0f, 0)
+            .build()
+
+        val mediaSessionCompat = MediaSessionCompat(context, "tag")
+        mediaSessionCompat.setPlaybackState(playbackStateCompat)
+        mediaSessionCompat.setMetadata(builder.build())
+
+        val notificationCompat = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setSmallIcon(R.drawable.ic_baseline_perm_media_24)
+            .setContentText(description)
+            .setContentTitle(title)
+            .setOnlyAlertOnce(true)
+            .setShowWhen(false)
+            .setOngoing(true)
+            .setTicker("Messaging Ticker")
+            .addAction(R.drawable.ic_baseline_skip_previous_24, "Previous", pendingIntent)
+            .addAction(R.drawable.ic_baseline_play_arrow_24, "Play", pendingIntent)
+            .addAction(R.drawable.ic_baseline_skip_next_24, "Next", pendingIntent)
+            .addAction(R.drawable.ic_baseline_repeat_24, "Repeat", pendingIntent)
+            .addAction(R.drawable.ic_baseline_random_24, "Random", pendingIntent)
+            .setWhen(System.currentTimeMillis())
+            .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
+                .setShowActionsInCompactView(1, 2, 3, 4, 5)
+                .setMediaSession(mediaSessionCompat.sessionToken)
+            )
+            .build()
+
+        notificationManager.notify(999, notificationCompat)
     }
 
     fun testGroup(context: Context, list: ArrayList<String>, notificationID: Int) {

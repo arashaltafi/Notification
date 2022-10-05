@@ -54,6 +54,12 @@
                 android:layout_height="wrap_content"
                 android:text="Test Progress" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTestMedia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Test Media" />
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etTitle"
                 android:layout_width="match_parent"
