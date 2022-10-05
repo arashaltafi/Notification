@@ -27,8 +27,8 @@ if(isset($_POST["nId"]))
 	$arrNotification["body"] = $body;
 	$arrNotification["title"] = "Message Notification";
 	$arrNotification["sound"] = "default";
-	$arrNotification["notification_id"] = "1";
-	$arrNotification["type"] = 1;
+	$arrNotification["notification_id"] = "3";
+	$arrNotification["type"] = 3;
 	$arrNotification["image"] = "https://arashaltafi.ir/arash.jpg";
     
 
