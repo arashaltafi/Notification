@@ -19,6 +19,7 @@ import com.arash.altafi.notification2.service.FirebaseService
 import com.arash.altafi.notification2.ui.media.MediaActivity
 import com.arash.altafi.notification2.ui.messenging.MessengingActivity
 import com.arash.altafi.notification2.ui.progress.ProgressActivity
+import com.arash.altafi.notification2.utils.NotificationUtils
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
@@ -68,6 +69,16 @@ class MainActivity : AppCompatActivity() {
         })
 
         FirebaseMessaging.getInstance().subscribeToTopic(topic)
+
+        btnTestSimple.setOnClickListener {
+            NotificationUtils.testNotification(
+                this,
+                5,
+                "تست عنوان",
+                "تست توضیحات",
+                "https://arashaltafi.ir/arash.jpg"
+            )
+        }
 
         btnTestGroup.setOnClickListener {
             startActivity(Intent(this, GroupActivity::class.java))

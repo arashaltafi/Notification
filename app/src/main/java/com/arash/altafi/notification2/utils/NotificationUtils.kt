@@ -8,6 +8,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.Icon
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
@@ -30,9 +32,68 @@ import java.net.URL
 
 object NotificationUtils {
 
-    fun sendNotification(context: Context, body: MyNotificationModel, message: RemoteMessage) {
+    fun sendNotification(
+        context: Context,
+        message: RemoteMessage
+    ) {
         val notificationID = message.data["notification_id"]?.toInt() ?: 1
-        Log.i("987564", "sendNotification: $notificationID")
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val intent = Intent(context, MainActivity::class.java)
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(
+                notificationManager,
+                soundUri = Uri.parse("android.resource://${context.packageName}/raw/notif")
+            )
+        }
+
+        var image: Bitmap? = null
+        if (message.data["image"]?.isNotEmpty() == true) {
+            try {
+                val url = URL(message.data["image"])
+                image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            } catch (e: IOException) {
+                image = null
+                Log.e("test123321", "$e")
+            }
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra("NotClick", true)
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            intent,
+            (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE
+            else 0x0)
+                    or
+                    PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setSmallIcon(R.drawable.ic_android_black_24dp)
+            .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
+            .setContentTitle(message.data["title"])
+            .setContentText(message.data["body"])
+            .setLargeIcon(image)
+            .setSound(defaultSoundUri)
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
+
+        notificationManager.notify(notificationID, notification.build())
+    }
+
+    fun sendNotificationGroup(
+        context: Context,
+        body: MyNotificationModel,
+        message: RemoteMessage
+    ) {
+        val notificationID = message.data["notification_id"]?.toInt() ?: 2
+
         val inboxStyle = NotificationCompat.InboxStyle()
 
         val intent = Intent(context, MainActivity::class.java)
@@ -73,7 +134,7 @@ object NotificationUtils {
         }
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_android_black_24dp)
+            .setSmallIcon(R.drawable.ic_round_groups_24)
             .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
             .setGroup(notificationID.toString())
             .setContentTitle(message.data["title"])
@@ -93,7 +154,7 @@ object NotificationUtils {
         list: MutableList<ChatData>,
         message: RemoteMessage
     ) {
-        val notificationID = message.data["notification_id"]?.toInt() ?: 1
+        val notificationID: Int = message.data["notification_id"]?.toInt() ?: 3
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -162,7 +223,7 @@ object NotificationUtils {
         )
 
         val notificationCompat = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_android_black_24dp)
+            .setSmallIcon(R.drawable.ic_round_message_24)
             .setContentTitle("ContentTitle")
             .setContentText("ContentText")
             .setSubText("SubText")
@@ -268,7 +329,57 @@ object NotificationUtils {
         notificationManager.notify(999, notificationCompat)
     }
 
-    fun testGroup(context: Context, list: ArrayList<String>, notificationID: Int) {
+    fun testNotification(
+        context: Context,
+        notificationID: Int,
+        title: String,
+        description: String,
+        image: String? = null
+    ) {
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val intent = Intent(context, MainActivity::class.java)
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(
+                notificationManager,
+                soundUri = Uri.parse("android.resource://${context.packageName}/raw/notif")
+            )
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra("NotClick", true)
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            intent,
+            (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE
+            else 0x0)
+                    or
+                    PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setSmallIcon(R.drawable.ic_android_black_24dp)
+            .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
+            .setContentTitle(title)
+            .setContentText(description)
+            .setLargeIcon(image?.getBitmapFromURL())
+            .setSound(defaultSoundUri)
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
+
+        notificationManager.notify(notificationID, notification.build())
+    }
+
+    fun testGroup(
+        context: Context,
+        list: ArrayList<String>,
+        notificationID: Int
+    ) {
         val inboxStyle = NotificationCompat.InboxStyle()
 
         val intent = Intent(context, MainActivity::class.java)
@@ -298,7 +409,7 @@ object NotificationUtils {
         }
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_android_black_24dp)
+            .setSmallIcon(R.drawable.ic_round_groups_24)
             .setGroup(notificationID.toString())
             .setContentTitle("title")
             .setContentText(list.last())
@@ -311,7 +422,11 @@ object NotificationUtils {
     }
 
     @SuppressLint("RestrictedApi")
-    fun testMessengingNotification(context: Context, nId: Int, list: MutableList<ChatData>) {
+    fun testMessengingNotification(
+        context: Context,
+        nId: Int,
+        list: MutableList<ChatData>
+    ) {
 
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -381,7 +496,7 @@ object NotificationUtils {
         )
 
         val notificationCompat = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_android_black_24dp)
+            .setSmallIcon(R.drawable.ic_round_message_24)
             .setContentTitle("User1")
             .setContentText("hi...san")
             .setSubText("ChatApp")
@@ -396,13 +511,27 @@ object NotificationUtils {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel(notificationManager: NotificationManager) {
-        val channelName = "channelName"
+    private fun createNotificationChannel(
+        notificationManager: NotificationManager,
+        soundUri: Uri? = null
+    ) {
+        val soundURI = soundUri ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val channelName = "channelName1"
         val channel = NotificationChannel(
             CHANNEL_ID,
             channelName,
             NotificationManager.IMPORTANCE_HIGH
         ).apply {
+            when (importance) {
+                NotificationManager.IMPORTANCE_HIGH,
+                NotificationManager.IMPORTANCE_DEFAULT -> {
+                    setSound(soundURI, audioAttributes)
+                }
+                NotificationManager.IMPORTANCE_LOW -> {
+                    if (soundUri != null)
+                        setSound(soundURI, audioAttributes)
+                }
+            }
             description = "My channel description"
             enableLights(true)
             lightColor = Color.GREEN

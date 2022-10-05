@@ -5,9 +5,16 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import java.io.IOException
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
+
 
 fun getPendingIntentFlags(isMutable: Boolean = false): Int {
     return when {
@@ -81,4 +88,17 @@ fun setPersianDigits(src: String?): String? {
         }
     }
     return result.toString()
+}
+
+fun String.getBitmapFromURL(): Bitmap? {
+    return try {
+        val url = URL(this)
+        val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
+        connection.doInput = true
+        connection.connect()
+        val input: InputStream = connection.inputStream
+        BitmapFactory.decodeStream(input)
+    } catch (e: Exception) {
+        null
+    }
 }

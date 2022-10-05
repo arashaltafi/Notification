@@ -37,26 +37,31 @@ class FirebaseService : FirebaseMessagingService() {
 
         Log.i("test123321", "onMessageReceived: ${message.data["body"]}")
 
-        val type = message.data["type"].toString()
-
-        if (type == "2") {
-            val notificationList = jsonUtils.getObject<MyNotificationModel>(message.data["body"].toString())
-            Log.i("test123321", "notificationList: $notificationList")
-            NotificationUtils.sendNotification(this, notificationList, message)
-        } else {
-            val notificationMessageList = jsonUtils.getObject<NotificationMessageModel>(message.data["body"].toString())
-            Log.i("test123321", "notificationMessageList: $notificationMessageList")
-            val list: MutableList<ChatData> = mutableListOf()
-            notificationMessageList.message.forEach {
-                list.add(ChatData(message = it))
+        when (message.data["type"].toString().toInt()) {
+            1 -> {
+                Log.i("test123321", "notification: ${message.data["body"].toString()}")
+                NotificationUtils.sendNotification(this, message)
             }
-            notificationMessageList.username.forEach {
-                list.add(ChatData(username = it))
+            2 -> {
+                val notificationList = jsonUtils.getObject<MyNotificationModel>(message.data["body"].toString())
+                Log.i("test123321", "notificationGroup: $notificationList")
+                NotificationUtils.sendNotificationGroup(this, notificationList, message)
             }
-            notificationMessageList.time.forEach {
-                list.add(ChatData(time = it.toLong()))
+            3 -> {
+                val notificationMessageList = jsonUtils.getObject<NotificationMessageModel>(message.data["body"].toString())
+                Log.i("test123321", "notificationMessageList: $notificationMessageList")
+                val list: MutableList<ChatData> = mutableListOf()
+                notificationMessageList.message.forEach {
+                    list.add(ChatData(message = it))
+                }
+                notificationMessageList.username.forEach {
+                    list.add(ChatData(username = it))
+                }
+                notificationMessageList.time.forEach {
+                    list.add(ChatData(time = it.toLong()))
+                }
+                NotificationUtils.sendMessageNotification(this, list, message)
             }
-            NotificationUtils.sendMessageNotification(this, list, message)
         }
     }
 }
