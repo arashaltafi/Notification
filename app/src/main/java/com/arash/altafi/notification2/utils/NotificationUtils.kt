@@ -329,6 +329,60 @@ object NotificationUtils {
         notificationManager.notify(999, notificationCompat)
     }
 
+    fun replayNotification(
+        context: Context,
+        title: String,
+        content: String,
+        priority: Int,
+        pendingIntent: PendingIntent? = null,
+        replyAction: NotificationCompat.Action? = null,
+        secondAction: NotificationCompat.Action? = null,
+        thirdAction: NotificationCompat.Action? = null
+    ) {
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(
+                notificationManager
+            )
+        }
+
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setContentTitle(title)
+            .setContentText(content)
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setAutoCancel(true)
+            .setPriority(priority)
+            .setContentIntent(pendingIntent)
+            .addAction(secondAction)
+            .addAction(thirdAction)
+            .addAction(replyAction)
+            .build()
+
+        notificationManager.notify(Constants.NOTIFICATION_ID, notification)
+    }
+
+    fun showNotif(
+        context: Context
+    ) {
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(
+                notificationManager
+            )
+        }
+
+        val repliedNotification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setContentText("Reply received")
+            .build()
+
+        notificationManager.notify(Constants.NOTIFICATION_ID, repliedNotification)
+    }
+
     fun testNotification(
         context: Context,
         notificationID: Int,

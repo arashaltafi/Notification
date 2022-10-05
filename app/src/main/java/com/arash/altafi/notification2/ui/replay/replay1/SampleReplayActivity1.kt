@@ -9,10 +9,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.RemoteInput
 import com.arash.altafi.notification2.databinding.ActivitySampleReplay1Binding
 import com.arash.altafi.notification2.utils.Constants.KEY_REPLY
-import com.arash.altafi.notification2.utils.Constants.NOTIFICATION_ID
-import com.arash.altafi.notification2.utils.createNotificationChannel
+import com.arash.altafi.notification2.utils.NotificationUtils
 import com.arash.altafi.notification2.utils.getPendingIntentFlags
-import com.arash.altafi.notification2.utils.initializeNotification
 
 class SampleReplayActivity1 : AppCompatActivity() {
 
@@ -31,7 +29,6 @@ class SampleReplayActivity1 : AppCompatActivity() {
         notificationManagerCompat = NotificationManagerCompat.from(this)
 
         binding.btnSample1.setOnClickListener {
-            createNotificationChannel(notificationManagerCompat)
             displayNotification()
         }
     }
@@ -86,8 +83,8 @@ class SampleReplayActivity1 : AppCompatActivity() {
                 "Media", pendingIntentThree
             ).build()
 
-        //initialize notification
-        val notification = initializeNotification(
+        NotificationUtils.replayNotification(
+            this,
             "WARNING!!!!!",
             "To go to the next Activity, click Here!",
             NotificationCompat.PRIORITY_HIGH,
@@ -96,8 +93,6 @@ class SampleReplayActivity1 : AppCompatActivity() {
             secondAction,
             thirdAction
         )
-
-        notificationManagerCompat.notify(NOTIFICATION_ID, notification)
     }
 
 }

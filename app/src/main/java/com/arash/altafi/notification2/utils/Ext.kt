@@ -50,17 +50,6 @@ fun Context.initializeNotification(
         .build()
 }
 
-fun createNotificationChannel(notificationManagerCompat: NotificationManagerCompat) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val channel = NotificationChannel(
-            Constants.CHANNEL_ID,
-            Constants.CHANNEL_NAME,
-            NotificationManager.IMPORTANCE_DEFAULT
-        )
-        notificationManagerCompat.createNotificationChannel(channel)
-    }
-}
-
 inline fun <reified NEW> Any.cast(): NEW? {
     return if (this.isCastable<NEW>())
         this as NEW
