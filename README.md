@@ -1,9 +1,9 @@
 # Push_Notification_2
 
-- Firebase Push Notificaton
+- Firebase Push Notification
 - Firebase Crash Crashlytics
-- Pushy Notificaton
-- Group Notificaton
-- Replay Notificaton
+- Pushy Notification
+- Group Notification
+- Replay Notification
 - Media Notification
 - Progress Notification
