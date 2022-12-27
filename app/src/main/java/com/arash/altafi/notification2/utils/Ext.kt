@@ -1,16 +1,12 @@
 package com.arash.altafi.notification2.utils
 
 import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import java.io.IOException
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -60,7 +56,7 @@ inline fun <reified NEW> Any.isCastable(): Boolean {
     return this is NEW
 }
 
-fun setPersianDigits(src: String?): String? {
+fun setPersianDigits(src: String?): String {
     val result = StringBuilder("")
     var unicode = 0
     if (src != null) {

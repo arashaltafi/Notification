@@ -164,19 +164,18 @@ object NotificationUtils {
 
         val messagingStyle = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val personStyle = Person.Builder()
-                .setName("me")
+                .setName(list.lastOrNull()?.username ?: "me")
                 .setIcon(
                     IconCompat.createFromIcon(
-                        Icon.createWithResource(
-                            context,
-                            R.drawable.ic_launcher_foreground
+                        Icon.createWithBitmap(
+                            list.lastOrNull()?.userAvatar?.getBitmapFromURL()!!
                         )
                     )
                 )
                 .build()
-            NotificationCompat.MessagingStyle(personStyle).setConversationTitle("GroupChat")
+            NotificationCompat.MessagingStyle(personStyle).setConversationTitle(list.last().message)
         } else {
-            NotificationCompat.MessagingStyle("me").setConversationTitle("GroupChat")
+            NotificationCompat.MessagingStyle("me").setConversationTitle(list.last().message)
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -184,11 +183,8 @@ object NotificationUtils {
                 val person = Person.Builder()
                     .setName(i.username)
                     .setIcon(
-                        IconCompat.createFromIcon(
-                            Icon.createWithResource(
-                                context,
-                                R.drawable.ic_android_black_24dp
-                            )
+                        IconCompat.createWithBitmap(
+                            i.userAvatar?.getBitmapFromURL()!!
                         )
                     )
                     .build()
@@ -224,13 +220,12 @@ object NotificationUtils {
 
         val notificationCompat = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_round_message_24)
-            .setContentTitle("ContentTitle")
-            .setContentText("ContentText")
-            .setSubText("SubText")
+            .setContentTitle(list.lastOrNull()?.username)
+            .setContentText(list.lastOrNull()?.message)
+            .setSubText(list.lastOrNull()?.message)
             .setStyle(messagingStyle)
             .setOnlyAlertOnce(true)
             .setContentIntent(pendingIntent)
-            .setOnlyAlertOnce(true)
             .setColor(Color.GREEN)
             .build()
 
@@ -249,11 +244,13 @@ object NotificationUtils {
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
-        val icon = if (isDownload) R.drawable.ic_baseline_file_download_24 else R.drawable.ic_baseline_file_upload_24
+        val icon =
+            if (isDownload) R.drawable.ic_baseline_file_download_24 else R.drawable.ic_baseline_file_upload_24
         val lockCancel: Boolean = progress < 100
         val indeterminate: Boolean = progress == 0
         val description = if (progress >= 100) "" else "$progress kb"
-        val finish = if (isDownload) "دانلود با موفقیت به پایان رسید" else "آپلود با موفقیت به پایان رسید"
+        val finish =
+            if (isDownload) "دانلود با موفقیت به پایان رسید" else "آپلود با موفقیت به پایان رسید"
         val titleNotification = if (isDownload) "در حال دانلود ..." else "در حال آپلود ..."
         val title = if (progress >= 100) finish else titleNotification
 
@@ -293,10 +290,10 @@ object NotificationUtils {
         val playbackStateCompat = PlaybackStateCompat.Builder()
             .setActions(
                 PlaybackStateCompat.ACTION_PLAY or PlaybackStateCompat.ACTION_PLAY_PAUSE or
-                PlaybackStateCompat.ACTION_FAST_FORWARD or PlaybackStateCompat.ACTION_REWIND or
-                PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID or PlaybackStateCompat.ACTION_PAUSE or
-                PlaybackStateCompat.ACTION_SKIP_TO_NEXT or PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
-                PlaybackStateCompat.ACTION_SEEK_TO
+                        PlaybackStateCompat.ACTION_FAST_FORWARD or PlaybackStateCompat.ACTION_REWIND or
+                        PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID or PlaybackStateCompat.ACTION_PAUSE or
+                        PlaybackStateCompat.ACTION_SKIP_TO_NEXT or PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
+                        PlaybackStateCompat.ACTION_SEEK_TO
             )
             .setState(PlaybackStateCompat.STATE_PLAYING, 0, 0f, 0)
             .build()
@@ -320,9 +317,10 @@ object NotificationUtils {
             .addAction(R.drawable.ic_baseline_repeat_24, "Repeat", pendingIntent)
             .addAction(R.drawable.ic_baseline_random_24, "Random", pendingIntent)
             .setWhen(System.currentTimeMillis())
-            .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
-                .setShowActionsInCompactView(1, 2, 3, 4, 5)
-                .setMediaSession(mediaSessionCompat.sessionToken)
+            .setStyle(
+                androidx.media.app.NotificationCompat.MediaStyle()
+                    .setShowActionsInCompactView(1, 2, 3, 4, 5)
+                    .setMediaSession(mediaSessionCompat.sessionToken)
             )
             .build()
 

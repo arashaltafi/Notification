@@ -26,13 +26,27 @@ class MessengingActivity : AppCompatActivity() {
             btnNotificationMessenging1.setOnClickListener {
                 username = edtUsername.text.toString()
                 message = edtMessage.text.toString()
-                list.add(ChatData(username, message, System.currentTimeMillis()))
+                list.add(
+                    ChatData(
+                        username = username,
+                        message = message,
+                        time = System.currentTimeMillis(),
+                        userAvatar = "https://arashaltafi.ir/arash.jpg"
+                    )
+                )
                 NotificationUtils.testMessengingNotification(this@MessengingActivity, 1, list)
             }
             btnNotificationMessenging2.setOnClickListener {
                 username = edtUsername.text.toString()
                 message = edtMessage.text.toString()
-                list.add(ChatData(username, message, System.currentTimeMillis()))
+                list.add(
+                    ChatData(
+                        username = username,
+                        message = message,
+                        time = System.currentTimeMillis(),
+                        userAvatar = "https://arashaltafi.ir/arash.jpg"
+                    )
+                )
                 NotificationUtils.testMessengingNotification(this@MessengingActivity, 2, list)
             }
         }

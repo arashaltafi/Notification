@@ -48,6 +48,7 @@ class ProgressActivity : AppCompatActivity() {
                     false
                 )
             }
+
             override fun onFinish() {
                 progressPercent = 100
             }
@@ -67,6 +68,7 @@ class ProgressActivity : AppCompatActivity() {
                     true
                 )
             }
+
             override fun onFinish() {
                 progressPercent = 100
             }

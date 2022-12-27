@@ -24,7 +24,7 @@ class JsonUtils constructor(
     }
 
     inline fun <reified MODEL> getSafeObjectList(json: String): Result<List<MODEL>> {
-        return runCatching { gson.fromJson(json, object : TypeToken<ArrayList<MODEL>>() {}.type)}
+        return runCatching { gson.fromJson(json, object : TypeToken<ArrayList<MODEL>>() {}.type) }
     }
 
     fun toJson(obj: Any): String {

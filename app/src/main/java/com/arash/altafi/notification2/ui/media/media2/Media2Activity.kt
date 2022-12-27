@@ -180,7 +180,13 @@ class Media2Activity : AppCompatActivity(), Playable {
 
     override fun onDestroy() {
         super.onDestroy()
-        notificationManager.cancelAll()
-        unregisterReceiver(broadCastReceiver)
+//        notificationManager.cancelAll()
+//        unregisterReceiver(broadCastReceiver)
+        stopService(
+            Intent(
+                baseContext,
+                OnClearFromRecentService::class.java
+            )
+        )
     }
 }
