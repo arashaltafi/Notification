@@ -38,17 +38,17 @@ class FirebaseService : FirebaseMessagingService() {
         Log.i("test123321", "onMessageReceived: ${message.data["body"]}")
 
         when (message.data["type"].toString().toInt()) {
-            1 -> {
+            1 -> {  // simple notification
                 Log.i("test123321", "notification: ${message.data["body"].toString()}")
                 NotificationUtils.sendNotification(this, message)
             }
-            2 -> {
+            2 -> {  // group notification
                 val notificationList =
                     jsonUtils.getObject<MyNotificationModel>(message.data["body"].toString())
                 Log.i("test123321", "notificationGroup: $notificationList")
                 NotificationUtils.sendNotificationGroup(this, notificationList, message)
             }
-            3 -> {
+            3 -> {  // messenger notification
                 val notificationMessageList =
                     jsonUtils.getObjectList<NotificationMessageModel>(message.data["body"].toString())
                 Log.i("test123321", "notificationMessageList: $notificationMessageList")
