@@ -1,8 +1,10 @@
 package com.arash.altafi.notification2.ui
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -20,6 +22,7 @@ import com.arash.altafi.notification2.ui.media.MediaActivity
 import com.arash.altafi.notification2.ui.messenging.MessengingActivity
 import com.arash.altafi.notification2.ui.progress.ProgressActivity
 import com.arash.altafi.notification2.utils.NotificationUtils
+import com.arash.altafi.notification2.utils.PermissionUtils
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
@@ -36,6 +39,12 @@ class MainActivity : AppCompatActivity() {
     private var deviceToken: String? = null
     private lateinit var registerForPushNotificationsAsync: RegisterForPushNotificationsAsync
 
+    private val registerNotificationResult = PermissionUtils.register(this,
+        object : PermissionUtils.PermissionListener {
+            override fun observe(permissions: Map<String, Boolean>) {
+            }
+        })
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -45,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         if (extras?.getBoolean("NotClick") == true) {
             Toast.makeText(this, "test", Toast.LENGTH_SHORT).show()
         }
+
+        requestPermissionNotification()
 
         pushy()
 
@@ -86,6 +97,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTestReplay.setOnClickListener {
             startActivity(Intent(this, ReplayActivity::class.java))
+        }
+
+        btnTestCustom.setOnClickListener {
+            NotificationUtils.sendCustomNotification(this, 101)
         }
 
         btnTestMessenging.setOnClickListener {
@@ -204,4 +219,15 @@ class MainActivity : AppCompatActivity() {
                 Log.e("test123321", "Exception: $e")
             }
         }
+
+    private fun requestPermissionNotification() {
+        if (!PermissionUtils.isGranted(this, Manifest.permission.POST_NOTIFICATIONS)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                PermissionUtils.requestPermission(
+                    this, registerNotificationResult,
+                    Manifest.permission.POST_NOTIFICATIONS
+                )
+            }
+        }
+    }
 }

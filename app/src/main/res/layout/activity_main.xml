@@ -43,6 +43,12 @@
                 android:text="Test Replay" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTestCustom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Test Custom" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnTestMessenging"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

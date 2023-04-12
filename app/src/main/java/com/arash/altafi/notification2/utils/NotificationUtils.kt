@@ -15,6 +15,7 @@ import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
+import android.widget.RemoteViews
 import androidx.annotation.IntRange
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -23,6 +24,7 @@ import androidx.core.graphics.drawable.IconCompat
 import com.arash.altafi.notification2.R
 import com.arash.altafi.notification2.models.ChatData
 import com.arash.altafi.notification2.models.MyNotificationModel
+import com.arash.altafi.notification2.ui.CloseAppActivity
 import com.arash.altafi.notification2.ui.MainActivity
 import com.arash.altafi.notification2.ui.media.media1.Media1Activity
 import com.arash.altafi.notification2.utils.Constants.CHANNEL_ID
@@ -425,6 +427,75 @@ object NotificationUtils {
             .setLargeIcon(image?.getBitmapFromURL())
             .setSound(defaultSoundUri)
             .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
+
+        notificationManager.notify(notificationID, notification.build())
+    }
+
+    fun sendCustomNotification(
+        context: Context,
+        notificationID: Int
+    ) {
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val intent = Intent(context, MainActivity::class.java)
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(
+                notificationManager,
+                soundUri = Uri.parse("android.resource://${context.packageName}/raw/notif")
+            )
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra("NotClick", true)
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            intent,
+            (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE
+            else 0x0)
+                    or
+                    PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val closeIntent = Intent(context, CloseAppActivity::class.java)
+        closeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        val pendingCloseIntent = PendingIntent.getActivity(
+            context,
+            0,
+            closeIntent,
+            (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE
+            else 0x0)
+                    or
+                    PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val notificationLayout =
+            RemoteViews(context.packageName, R.layout.layout_notification)
+
+        notificationLayout.setOnClickPendingIntent(
+            R.id.container,
+            pendingCloseIntent
+        )
+
+        notificationLayout.setOnClickPendingIntent(
+            R.id.exit,
+            pendingCloseIntent
+        )
+
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setSound(defaultSoundUri)
+            .setAutoCancel(true)
+            .setOngoing(false)
+            .setSmallIcon(R.drawable.ic_app_logo)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
+            .setCustomContentView(notificationLayout)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setSilent(true)
             .setContentIntent(pendingIntent)
 
         notificationManager.notify(notificationID, notification.build())
