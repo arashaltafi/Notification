@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "cccccd9f-6b22-44cf-8221-239203bba541",
+		"name": "Firebase Notification REST API",
+		"description": "Firebase collections to send a notification messages during development",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15581823"
+	},
+	"item": [
+		{
+			"name": "Create Topic",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "key={{server_key}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"to\": \"/topics/YOUR_TOPIC_NAME\",\r\n   \"registration_tokens\": [\r\n       \"dROj9m3-Rsub4LYU_XgW4d:APA91bFVQSmExgy67znSX6w8jr_6c4CrcuIHx2xaGZ_T9v9B-KgOaucTcSpIm4PfliICfmjEhUb-vLc3rvMB-WwVmb_z4AINW-U4CiOhW5-lKvZcWSulbLPkErfHplH_XP3QhAkGlZRd\",\r\n       \"dRL5tlExS6yjGieeWgti8O:APA91bEN9i3lxtldGq6fxG1Sv-T19Y1wMoP7BgoX5vkj8i0bAYlL9jzAF_zMgl15VtsIHnAnDHc-_y6VaQi55Beo_CQX0eeLNLtwcQeVWp9PS7KF2GYLGVaaRYjou2C4KTayu0QX5FZw\"\r\n   ]\r\n}"
+				},
+				"url": {
+					"raw": "https://iid.googleapis.com/iid/v1:batchAdd",
+					"protocol": "https",
+					"host": [
+						"iid",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"iid",
+						"v1:batchAdd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate FCM",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "key={{server_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://iid.googleapis.com/iid/info/{{iid_token}}",
+					"protocol": "https",
+					"host": [
+						"iid",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"iid",
+						"info",
+						"{{iid_token}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Topic",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "key={{server_key}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n   \"to\": \"/topics/TOPIC_NAME\",\r\n   \"registration_tokens\": [\"FCM_TOKENS\"]\r\n }"
+				},
+				"url": {
+					"raw": "https://iid.googleapis.com/iid/v1:batchRemove",
+					"protocol": "https",
+					"host": [
+						"iid",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"iid",
+						"v1:batchRemove"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Notification",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "key={{server_key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"priority\":\"HIGH\",\r\n  \"data\":{\r\n      \"title\" : \"title : title\",\r\n      \"message\": \"message : message\",\r\n      \"image\":\"https://arashaltafi.ir/arash.jpg\"\r\n  },\r\n  \"to\":\"d2rB3pi6SaSea_GKmRR7Nv:APA91bEGHRqp-jUPyuzjmqZcxfxkd8MDD3HC762Nx6kx4UBlmDM9fuiTrzVx7L_4KCC3emq35FjU6M7eqb6oTyKRf3_WcniBITreZYG_5VNdmRLuB1eNqBMbe1cNG0-R-uHuySlq1p2O\"\r\n}"
+				},
+				"url": {
+					"raw": "https://fcm.googleapis.com/fcm/send",
+					"protocol": "https",
+					"host": [
+						"fcm",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"fcm",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Group ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "key={{server_key}}"
+					},
+					{
+						"key": "project_id",
+						"value": "{{project_id}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"operation\": \"add\",\r\n   \"notification_key_name\": \"ANY_GROUP_NAME\",\r\n   \"registration_ids\": [\"VALID_FCM\"]\r\n}"
+				},
+				"url": {
+					"raw": "https://android.googleapis.com/gcm/notification",
+					"protocol": "https",
+					"host": [
+						"android",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"gcm",
+						"notification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Notification to Topic",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "key={{server_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"priority\":\"HIGH\",\r\n  \"data\":{\r\n      \"title\" : \"Body : Data\",\r\n      \"message\": \"Title : Data\",\r\n      \"image\":\"https://arashaltafi.ir/arash.jpg\"\r\n  },\r\n  \"to\":\"/topics/myTopic2\"\r\n}"
+				},
+				"url": {
+					"raw": "https://fcm.googleapis.com/fcm/send",
+					"protocol": "https",
+					"host": [
+						"fcm",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"fcm",
+						"send"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
