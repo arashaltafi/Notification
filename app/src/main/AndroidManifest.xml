@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.arash.altafi.notification2">
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
@@ -35,6 +39,9 @@
             android:enabled="true"
             android:exported="false" />
 
+        <activity
+            android:name=".ui.firebase.FirebaseActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.CloseAppActivity"
             android:exported="false" />
@@ -82,7 +89,7 @@
             android:exported="false" />
 
         <service
-            android:name="com.arash.altafi.notification2.service.FirebaseService"
+            android:name=".service.FirebaseService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -93,43 +100,7 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="my_channel" /> <!-- Pushy Declarations -->
-        <!-- Pushy Notification Receiver -->
-        <!-- Incoming push notifications will invoke the following BroadcastReceiver -->
-        <receiver
-            android:name=".pushy.PushReceiver"
-            android:exported="false">
-            <intent-filter>
-
-                <!-- Do not modify this -->
-                <action android:name="pushy.me" />
-            </intent-filter>
-        </receiver> <!-- Pushy Update Receiver -->
-        <!-- Do not modify - internal BroadcastReceiver that restarts the listener service -->
-        <receiver
-            android:name="me.pushy.sdk.receivers.PushyUpdateReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-            </intent-filter>
-        </receiver> <!-- Pushy Boot Receiver -->
-        <!-- Do not modify - internal BroadcastReceiver that restarts the listener service -->
-        <receiver
-            android:name="me.pushy.sdk.receivers.PushyBootReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver> <!-- Pushy Socket Service -->
-        <!-- Do not modify - internal service -->
-        <service
-            android:name="me.pushy.sdk.services.PushySocketService"
-            android:stopWithTask="false" /> <!-- Pushy Job Service (added in Pushy SDK 1.0.35) -->
-        <!-- Do not modify - internal service -->
-        <service
-            android:name="me.pushy.sdk.services.PushyJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:stopWithTask="false" /> <!-- End Pushy Declarations -->
+            android:value="my_channel" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">

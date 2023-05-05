@@ -17,18 +17,24 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginVertical="10dp"
+            android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
                 android:layout_gravity="center"
-                android:text="Sample Push Notification 2"
+                android:layout_marginVertical="10dp"
+                android:text="Sample Notification"
                 android:textSize="22sp"
                 android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTestFirebase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Test Firebase" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnTestSimple"
@@ -71,92 +77,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Test Media" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:hint="Enter Title     Require"
-                android:inputType="textPersonName" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Enter message   Require"
-                android:inputType="textPersonName" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Url Image"
-                android:inputType="text" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etToken"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Enter Token"
-                android:inputType="textPersonName"
-                android:visibility="invisible" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSendEmulator29"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Send To Emulator" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Send All" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSendS21FE"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Send To S21" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSendCurrentDevice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Send To Current Device" />
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPushyNotification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="2dp"
-                    android:text="Pushy Notification"
-                    android:textColor="@color/white"
-                    app:backgroundTint="#00B8D4" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnTestCrashlytics"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="2dp"
-                    android:text="Crashlytics"
-                    android:textColor="@color/white"
-                    app:backgroundTint="#EF5555" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

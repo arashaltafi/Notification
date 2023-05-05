@@ -5,8 +5,15 @@ import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Build
+import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
+import com.arash.altafi.notification2.R
+import com.arash.altafi.notification2.utils.glide.GlideUtils
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -86,4 +93,29 @@ fun String.getBitmapFromURL(): Bitmap? {
     } catch (e: Exception) {
         null
     }
+}
+
+fun Context.getBitmap(
+    url: Any,
+    result: ((Bitmap) -> Unit),
+    @DrawableRes placeholderRes: Int? = R.drawable.bit_placeholder_image,
+    @DrawableRes errorRes: Int? = R.drawable.bit_error_image,
+    requestOptions: RequestOptions? = null
+) {
+    GlideUtils(this).getBitmapRequestBuilder(requestOptions)
+        .load(url)
+        .apply {
+            placeholderRes?.let { placeholder(it) }
+            error(errorRes)
+        }
+        .into(object : CustomTarget<Bitmap>() {
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                result.invoke(resource)
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
+            }
+
+        })
+
 }

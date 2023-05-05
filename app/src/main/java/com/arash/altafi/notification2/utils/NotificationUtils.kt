@@ -89,6 +89,61 @@ object NotificationUtils {
         notificationManager.notify(notificationID, notification.build())
     }
 
+    fun sendNotificationPostMan(
+        context: Context,
+        message: RemoteMessage
+    ) {
+        val notificationID = message.data["notification_id"]?.toInt() ?: 1
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val intent = Intent(context, MainActivity::class.java)
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(
+                notificationManager,
+                soundUri = Uri.parse("android.resource://${context.packageName}/raw/notif")
+            )
+        }
+
+        var image: Bitmap? = null
+        if (message.data["image"]?.isNotEmpty() == true) {
+            try {
+                val url = URL(message.data["image"])
+                image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            } catch (e: IOException) {
+                image = null
+                Log.e("test123321", "$e")
+            }
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra("NotClick", true)
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            intent,
+            (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE
+            else 0x0)
+                    or
+                    PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setSmallIcon(R.drawable.ic_android_black_24dp)
+            .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
+            .setContentTitle(message.data["title"])
+            .setContentText(message.data["message"])
+            .setLargeIcon(image)
+            .setSound(defaultSoundUri)
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
+
+        notificationManager.notify(notificationID, notification.build())
+    }
+
     fun sendNotificationGroup(
         context: Context,
         body: MyNotificationModel,
@@ -245,15 +300,33 @@ object NotificationUtils {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(
+                notificationManager,
+                soundUri = Uri.parse("android.resource://${context.packageName}/raw/notif")
+            )
+        }
+
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
-        val icon =
-            if (isDownload) R.drawable.ic_baseline_file_download_24 else R.drawable.ic_baseline_file_upload_24
+
+        val icon = when {
+            progress >= 100 -> {
+                if (isDownload) R.drawable.ic_baseline_file_download_24
+                else R.drawable.ic_baseline_file_upload_24
+            }
+
+            else -> {
+                if (isDownload) android.R.drawable.stat_sys_download
+                else android.R.drawable.stat_sys_upload
+            }
+        }
+
         val lockCancel: Boolean = progress < 100
         val indeterminate: Boolean = progress == 0
         val description = if (progress >= 100) "" else "$progress kb"
         val finish =
-            if (isDownload) "دانلود با موفقیت به پایان رسید" else "آپلود با موفقیت به پایان رسید"
-        val titleNotification = if (isDownload) "در حال دانلود ..." else "در حال آپلود ..."
+            if (isDownload) "Download completed successfully" else "Upload completed successfully"
+        val titleNotification = if (isDownload) "Downloading..." else "Uploading..."
         val title = if (progress >= 100) finish else titleNotification
 
         notificationBuilder
@@ -275,11 +348,19 @@ object NotificationUtils {
     @SuppressLint("UseCompatLoadingForDrawables")
     fun mediaNotification(
         context: Context,
+        songImage: Bitmap,
         title: String,
         description: String
     ) {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(
+                notificationManager,
+                soundUri = Uri.parse("android.resource://${context.packageName}/raw/notif")
+            )
+        }
 
         val intent = Intent(context, Media1Activity::class.java)
         val pendingIntent: PendingIntent = PendingIntent.getActivity(
@@ -307,11 +388,12 @@ object NotificationUtils {
         val notificationCompat = NotificationCompat.Builder(context, CHANNEL_ID)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setSmallIcon(R.drawable.ic_baseline_perm_media_24)
+            .setLargeIcon(songImage)
             .setContentText(description)
             .setContentTitle(title)
             .setOnlyAlertOnce(true)
             .setShowWhen(false)
-            .setOngoing(true)
+            .setOngoing(false) //true
             .setTicker("Messaging Ticker")
             .addAction(R.drawable.ic_baseline_skip_previous_24, "Previous", pendingIntent)
             .addAction(R.drawable.ic_baseline_play_arrow_24, "Play", pendingIntent)
@@ -653,6 +735,7 @@ object NotificationUtils {
                 NotificationManager.IMPORTANCE_DEFAULT -> {
                     setSound(soundURI, audioAttributes)
                 }
+
                 NotificationManager.IMPORTANCE_LOW -> {
                     if (soundUri != null)
                         setSound(soundURI, audioAttributes)

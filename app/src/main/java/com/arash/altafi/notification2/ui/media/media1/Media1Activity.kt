@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.arash.altafi.notification2.databinding.ActivityMedia1Binding
 import com.arash.altafi.notification2.utils.NotificationUtils
+import com.arash.altafi.notification2.utils.getBitmap
 
 class Media1Activity : AppCompatActivity() {
 
@@ -20,11 +21,14 @@ class Media1Activity : AppCompatActivity() {
     private fun init() {
         binding.apply {
             btnNotificationMedia1.setOnClickListener {
-                NotificationUtils.mediaNotification(
-                    this@Media1Activity,
-                    "تست عنوان",
-                    "تست توضیحات"
-                )
+                getBitmap(url = "https://arashaltafi.ir/arash.jpg", result = { bitmap ->
+                    NotificationUtils.mediaNotification(
+                        this@Media1Activity,
+                        bitmap,
+                        "test title",
+                        "test description"
+                    )
+                })
             }
         }
     }

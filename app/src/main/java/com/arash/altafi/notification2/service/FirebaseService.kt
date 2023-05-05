@@ -12,7 +12,7 @@ import com.google.gson.Gson
 class FirebaseService : FirebaseMessagingService() {
 
     companion object {
-        var sharedPref: SharedPreferences? = null
+        private var sharedPref: SharedPreferences? = null
 
         var token: String?
             get() {
@@ -37,33 +37,37 @@ class FirebaseService : FirebaseMessagingService() {
 
         Log.i("test123321", "onMessageReceived: ${message.data["body"]}")
 
-        when (message.data["type"].toString().toInt()) {
-            1 -> {  // simple notification
-                Log.i("test123321", "notification: ${message.data["body"].toString()}")
-                NotificationUtils.sendNotification(this, message)
-            }
-            2 -> {  // group notification
-                val notificationList =
-                    jsonUtils.getObject<MyNotificationModel>(message.data["body"].toString())
-                Log.i("test123321", "notificationGroup: $notificationList")
-                NotificationUtils.sendNotificationGroup(this, notificationList, message)
-            }
-            3 -> {  // messenger notification
-                val notificationMessageList =
-                    jsonUtils.getObjectList<NotificationMessageModel>(message.data["body"].toString())
-                Log.i("test123321", "notificationMessageList: $notificationMessageList")
-                val list: MutableList<ChatData> = mutableListOf()
-                notificationMessageList.forEach { items ->
-                    list.add(
-                        ChatData(
-                            message = items.text,
-                            userAvatar = items.userAvatar,
-                            username = items.userName
-                        )
-                    )
+        message.data["type"]?.let {
+            when (it.toInt()) {
+                1 -> {  // simple notification
+                    Log.i("test123321", "notification: ${message.data["body"].toString()}")
+                    NotificationUtils.sendNotification(this, message)
                 }
-                NotificationUtils.sendMessageNotification(this, list, message)
+                2 -> {  // group notification
+                    val notificationList =
+                        jsonUtils.getObject<MyNotificationModel>(message.data["body"].toString())
+                    Log.i("test123321", "notificationGroup: $notificationList")
+                    NotificationUtils.sendNotificationGroup(this, notificationList, message)
+                }
+                3 -> {  // messenger notification
+                    val notificationMessageList =
+                        jsonUtils.getObjectList<NotificationMessageModel>(message.data["body"].toString())
+                    Log.i("test123321", "notificationMessageList: $notificationMessageList")
+                    val list: MutableList<ChatData> = mutableListOf()
+                    notificationMessageList.forEach { items ->
+                        list.add(
+                            ChatData(
+                                message = items.text,
+                                userAvatar = items.userAvatar,
+                                username = items.userName
+                            )
+                        )
+                    }
+                    NotificationUtils.sendMessageNotification(this, list, message)
+                }
             }
+        } ?: kotlin.run {
+            NotificationUtils.sendNotificationPostMan(this, message)
         }
     }
 }
